@@ -1,1 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalam&family=Source+Code+Pro:wght@200..900&display=swap');
+@import url('lib/font.css');
+
 @import 'tailwindcss';
+
+@theme {
+	--font-serif: "Source Sans Pro", sans-serif;
+	--font-mono: "Source Code Pro", monospace;
+	--font-handwriting: "Kalam", cursive;
+	--color-lavender-indigo: #8657e1;
+	--color-daisy-bush: #4714a5;
+	--color-golden-fizz: #feff40;
+	--color-robin-egg-blue: #00e9c0;
+	--color-blue-gem: #3813a0;
+	--color-caribbean-green: #1cc6a0;
+	--color-purple: #7209b7;
+	--color-pastel-purple: #b2a1bb;
+	--color-monsoon: #777878;
+	--color-silver: #c0c0c0;
+	--color-gallery: #efeaf2;
+	--color-whisper: #f9f4f9;
+	--color-scarlet: #f72f45;
+	--color-mint: #00ca9e;
+	--color-fog: #decaec;
+}
+
+/* <weight>: Use a value from 200 to 900
+<uniquifier>: Use a unique and descriptive class name
+
+.source-code-pro-<uniquifier> {
+  font-family: "Source Code Pro", monospace;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+} */
+
+/* .source-sans-3-<uniquifier> {
+  font-family: "Source Sans 3", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+} */
+
+/* .kalam-regular {
+  font-family: "Kalam", cursive;
+  font-weight: 400;
+  font-style: normal;
+} */
