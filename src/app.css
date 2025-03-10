@@ -22,10 +22,16 @@
 	--color-scarlet: #f72f45;
 	--color-mint: #00ca9e;
 	--color-fog: #decaec;
+	--z-navbar: 90;
+	--z-navbar-toggle: 91;
 }
 
 body {
 	font-family: var(--font-sans-serif);
+}
+
+svg {
+	fill: currentColor;
 }
 
 /* <weight>: Use a value from 200 to 900
