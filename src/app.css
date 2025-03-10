@@ -4,9 +4,9 @@
 @import 'tailwindcss';
 
 @theme {
-	--font-serif: "Source Sans Pro", sans-serif;
-	--font-mono: "Source Code Pro", monospace;
-	--font-handwriting: "Kalam", cursive;
+	--font-san-serif: "Source Sans Pro", "sans-serif";
+	--font-mono: "Source Code Pro", "monospace";
+	--font-handwriting: "Kalam", "cursive";
 	--color-lavender-indigo: #8657e1;
 	--color-daisy-bush: #4714a5;
 	--color-golden-fizz: #feff40;
@@ -22,6 +22,10 @@
 	--color-scarlet: #f72f45;
 	--color-mint: #00ca9e;
 	--color-fog: #decaec;
+}
+
+body {
+	font-family: var(--font-sans-serif);
 }
 
 /* <weight>: Use a value from 200 to 900
