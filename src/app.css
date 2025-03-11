@@ -4,9 +4,9 @@
 @import 'tailwindcss';
 
 @theme {
-	--font-san-serif: "Source Sans Pro", "sans-serif";
-	--font-mono: "Source Code Pro", "monospace";
-	--font-handwriting: "Kalam", "cursive";
+	--font-san-serif: "Source Sans Pro", sans-serif;
+	--font-mono: "Source Code Pro", monospace;
+	--font-handwriting: Kalam, cursive;
 	--color-lavender-indigo: #8657e1;
 	--color-daisy-bush: #4714a5;
 	--color-golden-fizz: #feff40;
@@ -22,16 +22,46 @@
 	--color-scarlet: #f72f45;
 	--color-mint: #00ca9e;
 	--color-fog: #decaec;
-	--z-navbar: 90;
-	--z-navbar-toggle: 91;
+	--shadow-colored: 0 7px 16px rgba(127, 91, 220, 0.002);
+	--shadow-colored-hover: 0 16px 25px rgba(127, 91, 220, 0.3);
+	--shadow-table-row: 0 0 6px rgba(0, 0, 0, 0.16);
+	--navbar: 90;
+	--navbar-toggle: 91;
+	--invoice-table: 100px 100px 60px 1fr 116px 32px 32px;
 }
 
-body {
-	font-family: var(--font-sans-serif);
+@layer base {
+	body {
+		font-family: "Source Sans Pro", sans-serif;
+		font-weight: 500;
+	}
+
+	svg {
+		fill: currentColor;
+	}
 }
 
-svg {
-	fill: currentColor;
+@layer components {
+	.invoice-table {
+		margin-bottom: 12px;
+		padding-inline: 24px;
+		width: 100%;
+		display: grid;
+		grid-template-columns: var(--invoice-table);
+		gap: 16px;
+	}
+
+	.bg-circle {
+		background: url('/images/circle.svg') no-repeat;
+	}
+}
+
+@layer utilities {
+	.center {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 }
 
 /* <weight>: Use a value from 200 to 900
