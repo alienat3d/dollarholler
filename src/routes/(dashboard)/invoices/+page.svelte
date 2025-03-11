@@ -1,9 +1,16 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+	// importing the store and the function that brings data from the store here
+	import { invoices, loadInvoices } from '$lib/stores/InvoiceStore';
 	import CircledAmount from '$lib/components/CircledAmount.svelte';
-	import ThreeDots from '$lib/components/Icon/ThreeDots.svelte';
-	import View from '$lib/components/Icon/View.svelte';
 	import Search from '$lib/components/Search.svelte';
-	import Tag from '$lib/components/Tag.svelte';
+	import InvoiceRow from './InvoiceRow.svelte';
+
+	// Here we should use "$" in front of "invoices", so that Svelte understands it’s not just variable but a store.
+	onMount(() => {
+		loadInvoices();
+		console.log($invoices);
+	});
 </script>
 
 <svelte:head><title>Invoices | The Dollar Holler</title></svelte:head>
@@ -35,29 +42,9 @@
 		<div></div>
 	</div>
 
+	<!-- Now, as we prepared a component for the invoice rows we can loop over data we get from seed file and insert it in each row. In Svelte we do that with special syntax #each. -->
 	<!-- invoices -->
-	<div
-		class="invoice-table table-header invoice-row shadow-table-row items-center rounded-lg bg-white py-3 lg:py-6"
-	>
-		<div class="status"><Tag className="ml-auto lg:ml-0" label="late" /></div>
-		<div class="due-date text-md lg:text-lg">11/3/2025</div>
-		<div class="invoice-number text-md lg:text-lg">12345</div>
-		<div class="client-name text-lg font-bold lg:text-xl">John Doe</div>
-		<div class="amount text-md text-right font-mono font-bold lg:text-left lg:text-lg">
-			$9999.99
-		</div>
-		<a
-			class="view-button text-pastel-purple hover:text-daisy-bush hidden transition-colors lg:block"
-			href="#"
-		>
-			<View />
-		</a>
-		<button
-			class="more-button center text-pastel-purple hover:text-daisy-bush cursor-pointer transition-colors"
-		>
-			<ThreeDots />
-		</button>
-	</div>
+	{#each $invoices as invoice}<InvoiceRow {invoice} />{/each}
 </div>
 
 <CircledAmount amount={2255.95} />
@@ -67,45 +54,5 @@
 		font-size: 20px;
 		font-weight: 900;
 		line-height: 1.375;
-	}
-
-	/* Naming columns in the rows */
-	.invoice-row {
-		grid-template-areas: 'invoice-number invoice-number' 'client-name amount' 'due-date status';
-	}
-	@media (min-width: 1024px) {
-		.invoice-row {
-			grid-template-areas: 'status due-date invoice-number client-name amount view-button more-button';
-		}
-	}
-	.invoice-row .status {
-		grid-area: status;
-	}
-	.invoice-row .due-date {
-		grid-area: due-date;
-	}
-	.invoice-row .invoice-number {
-		grid-area: invoice-number;
-	}
-	.invoice-row .client-name {
-		grid-area: client-name;
-	}
-	.invoice-row .amount {
-		grid-area: amount;
-	}
-	.invoice-row .view-button {
-		grid-area: view-button;
-	}
-	.invoice-row .more-button {
-		grid-area: more-button;
-	}
-
-	.more-button {
-		display: none;
-	}
-	@media (min-width: 1024px) {
-		.more-button {
-			display: block;
-		}
 	}
 </style>
