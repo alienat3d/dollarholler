@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let amount: number;
+	export let amount: string;
 </script>
 
 <div class="bg-circle center float-right flex min-h-[6rem] min-w-[16rem] gap-x-4">

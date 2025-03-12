@@ -1,23 +1,53 @@
-// Function for adding up different numbers and return it’s sum.
+/**
+ * Takes all the line items and adds them up
+ * @param {Array | undefined} lineItems
+ * @return {number}
+ */
 export const sumLineItems = (lineItems: LineItems[] | undefined): number => {
 	if (!lineItems) return 0;
 
 	return lineItems.reduce((previousValue, currentValue) => previousValue + currentValue.amount, 0);
 };
 
-// Function that format result converting cents to dollars.
+/**
+ * Takes and returns a dollar amount (USD), formatted with commas and 2 decimal places
+ * @param {number} cents
+ * @return {string}
+ */
 export const centsToDollars = (cents: number): string => {
 	const dollars = cents / 100;
 	const addDecimals = twoDecimals(dollars);
 	return addThousandsSeparator(addDecimals);
 };
 
-// Function that ensures that result has two decimal places.
-export const twoDecimals = (myNum: number): string => {
-	return myNum.toFixed(2);
-};
+/**
+ * Takes a number and returns the number with 2 decimal places
+ * @summary If the description is long, write your summary here. Otherwise, feel free to remove this.
+ * @param {number} myNum
+ * @return {string}
+ */
+export const twoDecimals = (myNum: number): string => myNum.toFixed(2);
 
-// Function that adds a comma after thousands (is looking for third digit to put a comma after it).
-export const addThousandsSeparator = (myNum: string): string => {
-	return myNum.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+/**
+ * Adds thousands separator
+ * @summary RegExp is looking for third digit to put a comma after it
+ * @param {string} myNum
+ * @return {string}
+ */
+export const addThousandsSeparator = (myNum: string): string =>
+	myNum.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+/**
+ * Takes all the invoices and finds the total
+ * @param {Invoice} invoices
+ * @return {number}
+ */
+export const sumInvoices = (invoices: Invoice[] | undefined): number => {
+	if (!invoices) return 0;
+
+	return invoices.reduce((previousValue, currentValue) => {
+		const invoiceSum = sumLineItems(currentValue.lineItems);
+
+		return previousValue + invoiceSum;
+	}, 0);
 };

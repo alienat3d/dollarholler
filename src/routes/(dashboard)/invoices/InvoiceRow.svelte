@@ -3,17 +3,30 @@
 	import View from '$lib/components/Icon/View.svelte';
 	import ThreeDots from '$lib/components/Icon/ThreeDots.svelte';
 	import { centsToDollars, sumLineItems } from '$lib/utils/moneyHelpers';
+	import { convertDate, isLate } from '$lib/utils/dateHelpers';
 
 	// We also should explicitly tell TypeScript the type of "invoice"
 	export let invoice: Invoice;
+
+	const getInvoiceLabel = () => {
+		if (invoice.invoiceStatus === 'draft') {
+			return 'draft';
+		} else if (invoice.invoiceStatus === 'sent' && !isLate(invoice.dueDate)) {
+			return 'sent';
+		} else if (invoice.invoiceStatus === 'sent' && isLate(invoice.dueDate)) {
+			return 'late';
+		} else if (invoice.invoiceStatus === 'paid') {
+			return 'paid';
+		}
+	};
 </script>
 
 <!-- So now we can fill in all the data in our template by names of keys from the data object we receive. -->
 <div
 	class="invoice-table table-header invoice-row shadow-table-row items-center rounded-lg bg-white py-3 lg:py-6"
 >
-	<div class="status"><Tag className="ml-auto lg:ml-0" label={invoice.invoiceStatus} /></div>
-	<div class="due-date text-md lg:text-lg">{invoice.dueDate}</div>
+	<div class="status"><Tag className="ml-auto lg:ml-0" label={getInvoiceLabel()} /></div>
+	<div class="due-date text-md lg:text-lg">{convertDate(invoice.dueDate)}</div>
 	<div class="invoice-number text-md lg:text-lg">{invoice.invoiceNumber}</div>
 	<div class="client-name truncate text-lg font-bold whitespace-nowrap lg:text-xl">
 		{invoice.client.name}
