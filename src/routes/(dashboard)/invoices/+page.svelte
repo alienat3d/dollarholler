@@ -5,6 +5,7 @@
 	import CircledAmount from '$lib/components/CircledAmount.svelte';
 	import Search from '$lib/components/Search.svelte';
 	import InvoiceRow from './InvoiceRow.svelte';
+	import { sumLineItems } from '$lib/utils/moneyHelpers';
 
 	// Here we should use "$" in front of "invoices", so that Svelte understands it’s not just variable but a store.
 	onMount(() => {
@@ -37,7 +38,7 @@
 		<h3>Due Date</h3>
 		<h3>ID</h3>
 		<h3>Client</h3>
-		<h3>Amount</h3>
+		<h3 class="text-right">Amount</h3>
 		<div></div>
 		<div></div>
 	</div>
@@ -47,7 +48,7 @@
 	{#each $invoices as invoice}<InvoiceRow {invoice} />{/each}
 </div>
 
-<CircledAmount amount={2255.95} />
+<!-- <CircledAmount amount={sumLineItems($invoices)} /> -->
 
 <style>
 	.table-header h3 {

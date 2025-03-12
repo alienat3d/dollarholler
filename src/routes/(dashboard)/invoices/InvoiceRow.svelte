@@ -2,6 +2,7 @@
 	import Tag from '$lib/components/Tag.svelte';
 	import View from '$lib/components/Icon/View.svelte';
 	import ThreeDots from '$lib/components/Icon/ThreeDots.svelte';
+	import { centsToDollars, sumLineItems } from '$lib/utils/moneyHelpers';
 
 	// We also should explicitly tell TypeScript the type of "invoice"
 	export let invoice: Invoice;
@@ -14,8 +15,12 @@
 	<div class="status"><Tag className="ml-auto lg:ml-0" label={invoice.invoiceStatus} /></div>
 	<div class="due-date text-md lg:text-lg">{invoice.dueDate}</div>
 	<div class="invoice-number text-md lg:text-lg">{invoice.invoiceNumber}</div>
-	<div class="client-name text-lg font-bold lg:text-xl">{invoice.client.name}</div>
-	<div class="amount text-md text-right font-mono font-bold lg:text-left lg:text-lg">$9999.99</div>
+	<div class="client-name truncate text-lg font-bold whitespace-nowrap lg:text-xl">
+		{invoice.client.name}
+	</div>
+	<div class="amount text-md text-right font-mono font-bold lg:text-lg">
+		${centsToDollars(sumLineItems(invoice.lineItems))}
+	</div>
 	<a
 		class="view-button text-pastel-purple hover:text-daisy-bush hidden transition-colors lg:block"
 		href="#"
