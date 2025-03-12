@@ -23,7 +23,7 @@
 	<!-- new invoice button -->
 	<div>
 		<button
-			class="bg-lavender-indigo font-san-serif shadow-colored hover:shadow-colored-hover text-md relative translate-y-0 cursor-pointer rounded-lg px-5 py-2 font-black whitespace-nowrap text-white transition-all hover:-translate-y-2 lg:px-10 lg:py-3 lg:text-xl"
+			class="bg-lavender-indigo font-sans-serif shadow-colored hover:shadow-colored-hover text-md relative translate-y-0 cursor-pointer rounded-lg px-5 py-2 font-black whitespace-nowrap text-white transition-all hover:-translate-y-2 lg:px-10 lg:py-3 lg:text-xl"
 			>+ Invoice</button
 		>
 	</div>
@@ -44,7 +44,12 @@
 
 	<!-- Now, as we prepared a component for the invoice rows we can loop over data we get from seed file and insert it in each row. In Svelte we do that with special syntax #each. -->
 	<!-- invoices -->
-	{#each $invoices as invoice}<InvoiceRow {invoice} />{/each}
+	<!-- To fix a z-index issue of the popping up 'more button menu' we made a flex-wrapper and set it to column-reverse. -->
+	<div class="flex flex-col-reverse">
+		{#each $invoices as invoice}
+			<InvoiceRow {invoice} />
+		{/each}
+	</div>
 </div>
 
 <CircledAmount amount={centsToDollars(sumInvoices($invoices))} />

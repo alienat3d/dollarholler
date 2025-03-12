@@ -2,20 +2,36 @@
 	import Tag from '$lib/components/Tag.svelte';
 	import View from '$lib/components/Icon/View.svelte';
 	import ThreeDots from '$lib/components/Icon/ThreeDots.svelte';
+	import Edit from '$lib/components/Icon/Edit.svelte';
+	import Trash from '$lib/components/Icon/Trash.svelte';
+	import Send from '$lib/components/Icon/Send.svelte';
 	import { centsToDollars, sumLineItems } from '$lib/utils/moneyHelpers';
 	import { convertDate, isLate } from '$lib/utils/dateHelpers';
+	import AdditionalOptions from '$lib/components/AdditionalOptions.svelte';
 
 	// We also should explicitly tell TypeScript the type of "invoice"
 	export let invoice: Invoice;
 
+	let isAdditionalMenuShowing = false;
+	// If the invoice have been sent then we shouldn’t allow to edit it or send it.
+	let isOptionsDisabled = false;
+
+	const handleDelete = () => console.log('deleting line');
+	const handleEdit = () => console.log('editing line');
+	const handleSendInvoice = () => console.log('sending invoice');
+
+	// Also add some extra logic for disabling buttons.
 	const getInvoiceLabel = () => {
 		if (invoice.invoiceStatus === 'draft') {
 			return 'draft';
 		} else if (invoice.invoiceStatus === 'sent' && !isLate(invoice.dueDate)) {
+			isOptionsDisabled = true;
 			return 'sent';
 		} else if (invoice.invoiceStatus === 'sent' && isLate(invoice.dueDate)) {
+			isOptionsDisabled = true;
 			return 'late';
 		} else if (invoice.invoiceStatus === 'paid') {
+			isOptionsDisabled = true;
 			return 'paid';
 		}
 	};
@@ -41,9 +57,21 @@
 		<View />
 	</a>
 	<button
-		class="more-button center text-pastel-purple hover:text-daisy-bush cursor-pointer transition-colors"
+		class="more-button center hover:text-daisy-bush relative hidden cursor-pointer transition-colors"
+		class:text-pastel-purple={!isAdditionalMenuShowing}
+		class:text-daisy-bush={isAdditionalMenuShowing}
+		on:click={() => (isAdditionalMenuShowing = !isAdditionalMenuShowing)}
 	>
 		<ThreeDots />
+		{#if isAdditionalMenuShowing}
+			<AdditionalOptions
+				options={[
+					{ label: 'Edit', icon: Edit, onClick: handleEdit, disabled: isOptionsDisabled },
+					{ label: 'Delete', icon: Trash, onClick: handleDelete, disabled: false },
+					{ label: 'Send', icon: Send, onClick: handleSendInvoice, disabled: isOptionsDisabled }
+				]}
+			/>
+		{/if}
 	</button>
 </div>
 
@@ -84,7 +112,7 @@
 	}
 	@media (min-width: 1024px) {
 		.more-button {
-			display: block;
+			display: flex;
 		}
 	}
 </style>
