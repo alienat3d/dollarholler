@@ -21,8 +21,6 @@ export const isLate = (myDate: string): boolean => {
 	const [year, month, day] = splitDate(myDate);
 	const dueDate = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
 	const today = new Date();
-	console.log(dueDate);
-	console.log(isBefore(dueDate, today));
 	return isBefore(dueDate, today); // will compare if dueDate’s date is before today’s date
 };
 

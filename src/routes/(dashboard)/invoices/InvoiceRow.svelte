@@ -8,6 +8,9 @@
 	import { centsToDollars, sumLineItems } from '$lib/utils/moneyHelpers';
 	import { convertDate, isLate } from '$lib/utils/dateHelpers';
 	import AdditionalOptions from '$lib/components/AdditionalOptions.svelte';
+	import Modal from '$lib/components/Modal.svelte';
+	import Button from '$lib/components/Button.svelte';
+	import { deleteInvoice } from '$lib/stores/InvoiceStore';
 
 	// We also should explicitly tell TypeScript the type of "invoice"
 	export let invoice: Invoice;
@@ -16,7 +19,9 @@
 	// If the invoice have been sent then we shouldn’t allow to edit it or send it.
 	let isOptionsDisabled = false;
 
-	const handleDelete = () => console.log('deleting line');
+	let isModalShowing = false;
+
+	const handleDelete = () => (isModalShowing = true);
 	const handleEdit = () => console.log('editing line');
 	const handleSendInvoice = () => console.log('sending invoice');
 
@@ -74,6 +79,34 @@
 		{/if}
 	</button>
 </div>
+
+<Modal isVisible={isModalShowing} on:close={() => (isModalShowing = false)}>
+	<div class="flex h-full min-h-44 flex-col items-center justify-between gap-6">
+		<div class="text-daisy-bush text-center text-xl font-bold">
+			Are you sure you want to delete this invoice to
+			<span class="text-scarlet">{invoice.client.name}</span> for
+			<span class="text-scarlet">${centsToDollars(sumLineItems(invoice.lineItems))}</span>?
+		</div>
+		<div class="mb-5 flex gap-5">
+			<Button
+				label={'Cancel'}
+				isAnimated={false}
+				style="secondary"
+				onClick={() => (isModalShowing = false)}
+			/>
+			<!-- Here we’ll add on click also a freshly made store function 'deleteInvoice', which deletes the current invoice from the store. -->
+			<Button
+				label={'Yes, Delete It'}
+				isAnimated={false}
+				style="destructive"
+				onClick={() => {
+					deleteInvoice(invoice);
+					isModalShowing = false;
+				}}
+			/>
+		</div>
+	</div>
+</Modal>
 
 <style>
 	/* Naming columns in the rows */

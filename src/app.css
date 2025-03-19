@@ -7,26 +7,31 @@
 	--font-sans-serif: "Source Sans Pro", sans-serif;
 	--font-mono: "Source Code Pro", monospace;
 	--font-handwriting: Kalam, cursive;
-	--color-lavender-indigo: #8657e1;
-	--color-daisy-bush: #4714a5;
-	--color-golden-fizz: #feff40;
-	--color-robin-egg-blue: #00e9c0;
 	--color-blue-gem: #3813a0;
 	--color-caribbean-green: #1cc6a0;
-	--color-purple: #7209b7;
-	--color-pastel-purple: #b2a1bb;
-	--color-monsoon: #777878;
-	--color-silver: #c0c0c0;
-	--color-gallery: #efeaf2;
-	--color-whisper: #f9f4f9;
-	--color-scarlet: #f72f45;
-	--color-mint: #00ca9e;
+	--color-daisy-bush: #4714a5;
 	--color-fog: #decaec;
+	--color-gallery: #efeaf2;
+	--color-golden-fizz: #feff40;
+	--color-lavender-indigo: #8657e1;
+	--color-mint: #00ca9e;
+	--color-monsoon: #777878;
+	--color-pastel-purple: #b2a1bb;
+	--color-prim: #ede6ef;
+	--color-purple: #7209b7;
+	--color-robin-egg-blue: #00e9c0;
+	--color-scarlet: #f72f45;
+	--color-silver: #c0c0c0;
+	--color-whisper: #f9f4f9;
 	--shadow-colored: 0 7px 16px rgba(127, 91, 220, 0.002);
 	--shadow-colored-hover: 0 16px 25px rgba(127, 91, 220, 0.3);
 	--shadow-table-row: 0 0 6px rgba(0, 0, 0, 0.16);
+	/* Z-indexes */
 	--navbar: 90;
 	--navbar-toggle: 91;
+	--modal-overlay: 998;
+	--modal-window: 999;
+	/* Table templates */
 	--invoice-table: 100px 100px 60px 1fr 116px 32px 32px;
 	--invoice-table-mobile: 1fr 90px;
 }
@@ -62,6 +67,14 @@
 	.bg-circle {
 		background: url('/images/circle.svg') no-repeat;
 	}
+
+	.arrow-pointer-left {
+		background: url('/images/arrow-pointer-left.svg') no-repeat left top;
+	}
+
+	.arrow-pointer-right {
+		background: url('/images/arrow-pointer-right.svg') no-repeat right top;
+	}
 }
 
 @layer utilities {
@@ -71,26 +84,3 @@
 		align-items: center;
 	}
 }
-
-/* <weight>: Use a value from 200 to 900
-<uniquifier>: Use a unique and descriptive class name
-
-.source-code-pro-<uniquifier> {
-  font-family: "Source Code Pro", monospace;
-  font-optical-sizing: auto;
-  font-weight: <weight>;
-  font-style: normal;
-} */
-
-/* .source-sans-3-<uniquifier> {
-  font-family: "Source Sans 3", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: <weight>;
-  font-style: normal;
-} */
-
-/* .kalam-regular {
-  font-family: "Kalam", cursive;
-  font-weight: 400;
-  font-style: normal;
-} */
