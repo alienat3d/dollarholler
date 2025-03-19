@@ -26,10 +26,12 @@
 	--shadow-colored: 0 7px 16px rgba(127, 91, 220, 0.002);
 	--shadow-colored-hover: 0 16px 25px rgba(127, 91, 220, 0.3);
 	--shadow-table-row: 0 0 6px rgba(0, 0, 0, 0.16);
+	--shadow-slide-panel: -4px 0 44px rgba(0, 0, 0, 0.25);
 	/* Z-indexes */
 	--navbar: 90;
 	--navbar-toggle: 91;
-	--modal-overlay: 998;
+	--modal-overlay: 997;
+	--slide-panel: 998;
 	--modal-window: 999;
 	/* Table templates */
 	--invoice-table: 100px 100px 60px 1fr 116px 32px 32px;

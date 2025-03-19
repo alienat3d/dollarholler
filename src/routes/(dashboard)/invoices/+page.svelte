@@ -9,6 +9,9 @@
 	import BlankState from './BlankState.svelte';
 	import InvoiceRowHeader from './InvoiceRowHeader.svelte';
 	import Button from '$lib/components/Button.svelte';
+	import SlidePanel from '$lib/components/SlidePanel.svelte';
+
+	let isInvoiceFormShowing: boolean = false;
 
 	// Here we should use "$" in front of "invoices", so that Svelte understands it’s not just variable but a store.
 	onMount(() => {
@@ -28,7 +31,12 @@
 	{/if}
 	<!-- new invoice button -->
 	<div>
-		<Button label="+ Invoice" onClick={() => {}} />
+		<Button
+			label="+ Invoice"
+			onClick={() => {
+				isInvoiceFormShowing = true;
+			}}
+		/>
 	</div>
 </div>
 
@@ -52,5 +60,11 @@
 	{/if}
 </div>
 
-<!-- Listening for newly created by EventDispatcher event "close" and when it triggers sets isModalShowing to false. -->
-<!-- <Modal isVisible={isModalShowing} on:close={() => (isModalShowing = false)} /> -->
+<!-- Slide Panel (for + Invoice button) -->
+{#if isInvoiceFormShowing}
+	<SlidePanel
+		on:closePanel={() => {
+			isInvoiceFormShowing = false;
+		}}>Slide Panel</SlidePanel
+	>
+{/if}
