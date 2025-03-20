@@ -2,6 +2,16 @@
 	import Button from '$lib/components/Button.svelte';
 	import CheckMark from '$lib/components/Icon/CheckMark.svelte';
 	import Trash from '$lib/components/Icon/Trash.svelte';
+	import LineItemRows from './LineItemRows.svelte';
+
+	const blankLineItem = [
+		{
+			id: '1',
+			description: '',
+			quantity: 0,
+			amount: 0
+		}
+	];
 </script>
 
 <h2 class="font-sans-serif text-daisy-bush mt-7 text-3xl font-bold">Add an Invoice</h2>
@@ -40,7 +50,9 @@
 		<input type="text" name="subject" />
 	</div>
 	<!-- line items -->
-	<div class="field col-span-6">Line Items</div>
+	<div class="field col-span-6">
+		<LineItemRows lineItems={blankLineItem} />
+	</div>
 	<!-- notes -->
 	<div class="field col-span-6">
 		<label for="notes"
@@ -65,7 +77,7 @@
 			onClick={() => {}}
 			isAnimated={false}
 			iconLeft={Trash}
-			style="textOnly"
+			style="textOnlyDestructive"
 			label="Delete"
 		/>
 	</div>

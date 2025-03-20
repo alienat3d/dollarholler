@@ -15,7 +15,7 @@ interface Invoice {
 	invoiceNumber: string;
 	invoiceStatus: InvoiceStatus;
 	issueDate: string;
-	lineItems?: LineItems[];
+	lineItems?: LineItem[];
 	notes?: string;
 	subject?: string;
 	terms?: string;
@@ -33,7 +33,7 @@ interface Client {
 	zipCode: string;
 }
 
-interface LineItems {
+interface LineItem {
 	amount: number;
 	description: string;
 	id: string;
