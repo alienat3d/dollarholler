@@ -10,6 +10,7 @@
 	import InvoiceRowHeader from './InvoiceRowHeader.svelte';
 	import Button from '$lib/components/Button.svelte';
 	import SlidePanel from '$lib/components/SlidePanel.svelte';
+	import InvoiceForm from './InvoiceForm.svelte';
 
 	let isInvoiceFormShowing: boolean = false;
 
@@ -51,7 +52,7 @@
 	{:else}
 		<InvoiceRowHeader className="text-daisy-bush" />
 		<!-- To fix a z-index issue of the popping up 'more button menu' we made a flex-wrapper and set it to column-reverse. -->
-		<div class="flex flex-col-reverse">
+		<div class="flex flex-col-reverse transition-colors">
 			{#each $invoices as invoice (invoice.id)}
 				<InvoiceRow {invoice} />
 			{/each}
@@ -65,6 +66,8 @@
 	<SlidePanel
 		on:closePanel={() => {
 			isInvoiceFormShowing = false;
-		}}>Slide Panel</SlidePanel
+		}}
 	>
+		<InvoiceForm></InvoiceForm>
+	</SlidePanel>
 {/if}

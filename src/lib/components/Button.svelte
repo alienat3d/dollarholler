@@ -1,20 +1,30 @@
 <script lang="ts">
+	import type { SvelteComponent } from 'svelte';
+
 	export let label: string;
 	export let onClick: () => void;
 
-	export let style: 'primary' | 'secondary' | 'destructive' = 'primary';
+	export let style: 'primary' | 'secondary' | 'destructive' | 'outline' | 'textOnly' = 'primary';
 	export let isAnimated = true;
+
+	// Adding an ability to add icons on the left or on the right side of the button.
+	export let iconLeft: (new (...args: any[]) => SvelteComponent) | null = null;
+	export let iconRight: (new (...args: any[]) => SvelteComponent) | null = null;
 </script>
 
 <button
-	on:click|preventDefault={() => onClick()}
+	on:click|preventDefault={onClick}
 	class:isAnimated
 	class:primary={style === 'primary'}
 	class:secondary={style === 'secondary'}
 	class:destructive={style === 'destructive'}
-	class="font-sans-serif text-md relative cursor-pointer rounded-lg px-5 py-2 font-black whitespace-nowrap lg:px-10 lg:py-3 lg:text-xl"
+	class:outline={style === 'outline'}
+	class:textOnly={style === 'textOnly'}
+	class="font-sans-serif text-md relative flex cursor-pointer items-center rounded-lg px-5 py-2 font-black whitespace-nowrap lg:px-10 lg:py-3 lg:text-xl"
 >
+	{#if iconLeft}<svelte:component this={iconLeft} class="mr-2" />{/if}
 	{label}
+	{#if iconRight}<svelte:component this={iconRight} class="ml-2" />{/if}
 </button>
 
 <style>
@@ -56,5 +66,28 @@
 	.destructive {
 		background-color: var(--color-scarlet) /* #f72f45 */;
 		color: var(--color-golden-fizz) /* #feff40 */;
+	}
+	/* Same as: "border-daisy-bush text-daisy-bush" */
+	.outline {
+		border: 1px solid var(--color-daisy-bush) /* #4714a5 */;
+		color: var(--color-daisy-bush) /* #4714a5 */;
+		transition: all 0.25s ease;
+	}
+	/* Same as: hover:bg-daisy-bush hover:text-white */
+	.outline:hover {
+		background-color: var(--color-daisy-bush) /* #4714a5 */;
+		color: var(--color-white) /* #fff */;
+	}
+	/* Same as: "bg-transparent px-0 text-scarlet underline" */
+	.textOnly {
+		padding-left: 0;
+		padding-right: 0;
+		background-color: transparent;
+		color: var(--color-scarlet) /* #f72f45 */;
+		text-decoration-line: underline;
+	}
+	/* Same as: "hover:no-underline" */
+	.textOnly:hover {
+		text-decoration-line: none;
 	}
 </style>
