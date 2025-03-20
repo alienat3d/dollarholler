@@ -22,9 +22,9 @@
 	class:textOnly={style === 'textOnly'}
 	class="font-sans-serif text-md relative flex cursor-pointer items-center rounded-lg px-5 py-2 font-black whitespace-nowrap lg:px-10 lg:py-3 lg:text-xl"
 >
-	{#if iconLeft}<svelte:component this={iconLeft} class="mr-2" />{/if}
+	{#if iconLeft}<svelte:component this={iconLeft} className="mr-2" />{/if}
 	{label}
-	{#if iconRight}<svelte:component this={iconRight} class="ml-2" />{/if}
+	{#if iconRight}<svelte:component this={iconRight} className="ml-2" />{/if}
 </button>
 
 <style>

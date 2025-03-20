@@ -1,5 +1,6 @@
 <script>
 	import Button from '$lib/components/Button.svelte';
+	import CheckMark from '$lib/components/Icon/CheckMark.svelte';
 	import Trash from '$lib/components/Icon/Trash.svelte';
 </script>
 
@@ -68,8 +69,14 @@
 			label="Delete"
 		/>
 	</div>
-	<div class="field col-span-4 flex justify-end gap-x-5">
+	<div class="field col-span-4 mr-2 flex justify-end gap-x-5">
 		<Button onClick={() => {}} isAnimated={false} style="secondary" label="Cancel" />
-		<Button onClick={() => {}} isAnimated={false} style="textOnly" label="Save" />
+		<Button
+			onClick={() => {}}
+			isAnimated={false}
+			iconLeft={CheckMark}
+			style="primary"
+			label="Save"
+		/>
 	</div>
 </form>

@@ -1,9 +1,11 @@
 <script lang="ts">
 	export let width = 24,
 		height = 24;
+
+	export let className: string = '';
 </script>
 
-<svg {width} {height} viewBox="0 0 24 24">
+<svg class={className} {width} {height} viewBox="0 0 24 24">
 	<path
 		d="M5.37793 19.1052C5.37793 20.1502 6.20038 21 7.2117 21H16.3806C17.3919 21 18.2144 20.1502 18.2144 19.1052V7.73682H5.37793V19.1052ZM7.2117 9.63155H16.3806L16.3815 19.1052H7.2117V9.63155Z"
 	/>
