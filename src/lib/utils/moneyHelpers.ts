@@ -1,53 +1,51 @@
 /**
  * Takes all the line items and adds them up
- * @param {Array | undefined} lineItems
- * @return {number}
+ * @param {Array|undefined} lineItems
+ * @returns {number}
  */
-export const sumLineItems = (lineItems: LineItems[] | undefined): number => {
-	if (!lineItems) return 0;
-
-	return lineItems.reduce((previousValue, currentValue) => previousValue + currentValue.amount, 0);
-};
+export const sumLineItems = (lineItems: LineItem[] | undefined): number => {
+  if (!lineItems) return 0
+  return lineItems.reduce((prevValue, curValue) => prevValue + curValue.amount, 0)
+}
 
 /**
- * Takes and returns a dollar amount (USD), formatted with commas and 2 decimal places
+ * Takes and returns a dollar amount (USD), formatted with commas and 2 decimals places
  * @param {number} cents
- * @return {string}
+ * @returns {string}
  */
 export const centsToDollars = (cents: number): string => {
-	const dollars = cents / 100;
-	const addDecimals = twoDecimals(dollars);
-	return addThousandsSeparator(addDecimals);
-};
+  const dollars = cents / 100;
+  const addDecimals = twoDecimals(dollars);
+  return addThousandsSeparator(addDecimals);
+}
 
 /**
  * Takes a number and returns the number with 2 decimal places
- * @summary If the description is long, write your summary here. Otherwise, feel free to remove this.
  * @param {number} myNum
- * @return {string}
+ * @returns {string}
  */
-export const twoDecimals = (myNum: number): string => myNum.toFixed(2);
+export const twoDecimals = (myNum: number): string => {
+  return myNum.toFixed(2)
+}
 
 /**
- * Adds thousands separator
- * @summary RegExp is looking for third digit to put a comma after it
+ * Adds a thousands separator
  * @param {string} myNum
- * @return {string}
+ * @returns {string}
  */
-export const addThousandsSeparator = (myNum: string): string =>
-	myNum.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+export const addThousandsSeparator = (myNum: string): string => {
+  return myNum.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+}
 
 /**
  * Takes all the invoices and finds the total
  * @param {Invoice} invoices
- * @return {number}
+ * @returns {number}
  */
 export const sumInvoices = (invoices: Invoice[] | undefined): number => {
-	if (!invoices) return 0;
-
-	return invoices.reduce((previousValue, currentValue) => {
-		const invoiceSum = sumLineItems(currentValue.lineItems);
-
-		return previousValue + invoiceSum;
-	}, 0);
-};
+  if (!invoices) return 0
+  return invoices.reduce((prevValue, curValue) => {
+    const invoiceSum = sumLineItems(curValue.lineItems);
+    return prevValue + invoiceSum;
+  }, 0)
+}

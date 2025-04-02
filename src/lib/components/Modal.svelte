@@ -1,37 +1,32 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
-	import Cancel from './Icon/Cancel.svelte';
-	import Overlay from './Overlay.svelte';
-	import Portal from './Portal.svelte';
+  import { createEventDispatcher } from 'svelte';
+  import Portal from '$lib/components/Portal.svelte';
+  import Cancel from './Icon/Cancel.svelte';
+  import Overlay from './Overlay.svelte';
 
-	// Creating a prop which will determine if we can see the modal windows or not.
-	export let isVisible: boolean = false;
-
-	// [(!) Svelte 4 syntax] But to make everything work right we’ll need also to dispatch an event, so the parent component also changes his state with this one.
-	const dispatch = createEventDispatcher();
+  export let isVisible: boolean = false;
+  const dispatch = createEventDispatcher();
 </script>
 
-<!-- What if we want to close modal window with an "Esc" button on a keyboard? Let’s do this. -->
 <svelte:window
-	on:keydown={(evt) => {
-		if (evt.key === 'Escape') dispatch('close');
-	}}
+  on:keydown={(event) => {
+    if (event.key === 'Escape') {
+      dispatch('close');
+    }
+  }}
 />
 
-<!-- Creating modal component via Portal component for confirmation of user actions such as delete entry and so on. -->
 {#if isVisible}
-	<Portal>
-		<Overlay />
-		<div class="center fixed inset-0 z-[--modal-window]">
-			<div class="relative min-h-56 w-full max-w-md rounded-lg bg-white px-10 py-7">
-				<button
-					class="text-pastel-purple hover:text-daisy-bush absolute top-4 right-4 cursor-pointer transition-colors"
-					on:click={() => dispatch('close')}
-				>
-					<Cancel />
-				</button>
-				<slot></slot>
-			</div>
-		</div>
-	</Portal>
+  <Portal>
+    <Overlay />
+    <div class="center fixed inset-0 z-modal">
+      <div class="relative min-h-[230px] w-full max-w-[450px] rounded-lg bg-white px-10 py-7">
+        <button
+          on:click={() => dispatch('close')}
+          class="absolute right-4 top-4 text-pastelPurple hover:text-daisyBush"><Cancel /></button
+        >
+        <slot><!-- optional fallback --></slot>
+      </div>
+    </div>
+  </Portal>
 {/if}

@@ -1,105 +1,32 @@
-@import url('https://fonts.googleapis.com/css2?family=Kalam&family=Source+Code+Pro:wght@200..900&display=swap');
-@import url('lib/font.css');
+@import url('https://fonts.googleapis.com/css2?family=Kalam&family=Source+Code+Pro:wght@400;700&family=Source+Sans+Pro:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap');
 
-@import 'tailwindcss';
-
-@theme {
-	--font-sans-serif: "Source Sans Pro", sans-serif;
-	--font-mono: "Source Code Pro", monospace;
-	--font-handwriting: Kalam, cursive;
-	--color-blue-gem: #3813a0;
-	--color-caribbean-green: #1cc6a0;
-	--color-daisy-bush: #4714a5;
-	--color-fog: #decaec;
-	--color-gallery: #efeaf2;
-	--color-golden-fizz: #feff40;
-	--color-lavender-indigo: #8657e1;
-	--color-mint: #00ca9e;
-	--color-monsoon: #777878;
-	--color-pastel-purple: #b2a1bb;
-	--color-prim: #ede6ef;
-	--color-purple: #7209b7;
-	--color-robin-egg-blue: #00e9c0;
-	--color-scarlet: #f72f45;
-	--color-silver: #c0c0c0;
-	--color-whisper: #f9f4f9;
-	--shadow-colored: 0 7px 16px rgba(127, 91, 220, 0.002);
-	--shadow-colored-hover: 0 16px 25px rgba(127, 91, 220, 0.3);
-	--shadow-table-row: 0 0 6px rgba(0, 0, 0, 0.16);
-	--shadow-slide-panel: -4px 0 44px rgba(0, 0, 0, 0.25);
-	/* Z-indexes */
-	--navbar: 90;
-	--navbar-toggle: 91;
-	--modal-overlay: 997;
-	--slide-panel: 998;
-	--modal-window: 999;
-	/* Table templates */
-	--invoice-line-item: 1fr 100px 100px 100px 65px;
-	--invoice-table: 100px 100px 60px 1fr 116px 32px 32px;
-	--invoice-table-mobile: 1fr 90px;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer base {
 	body {
-		font-family: "Source Sans Pro", sans-serif;
-		font-weight: 500;
+		@apply font-sansSerif
 	}
 
 	label {
-		display: block;
-		font-family: "Source Sans Pro", sans-serif;
-		font-size: 16px;
-		font-weight: 700;
-		color: var(--color-monsoon);
+		@apply block font-sansSerif text-base font-bold text-monsoon;
 	}
 
-	input[type="text"]:not(.search),
-	input[type="number"]:not(.line-item),
-	input[type="date"],
-	input[type="password"],
-	input[type="email"] {
-		border: 2px solid var(--color-silver);
-		border-radius: 8px;
-		padding-left: 16px;
-		padding-right: 16px;
-		width: 100%;
-		height: 56px;
-		font-family: "Source Sans Pro", sans-serif;
-		font-size: 16px;
-	}
-
-	textarea {
-		border: 2px solid var(--color-silver);
-		border-radius: 8px;
-		padding: 16px;
-		width: 100%;
-		height: 128px;
-		font-family: "Source Sans Pro", sans-serif;
-		font-size: 16px;
-	}
-
-	select {
-		appearance: none;
-		border: 2px solid var(--color-silver);
-		border-radius: 8px;
-		height: 56px;
-		width: 100%;
-		padding: 16px;
-		background: url('images/chevron--down.svg') no-repeat 97% center;
-	}
-
-	svg {
-		fill: currentColor;
-	}
-
-	select,
-	textarea,
 	input[type="text"]:not(.search):not(.line-item),
 	input[type="number"]:not(.line-item),
 	input[type="date"],
 	input[type="password"],
 	input[type="email"] {
-		transition: border .15s ease;
+		@apply h-14 w-full rounded-lg border-2 border-silver px-4 font-sansSerif text-base;
+	}
+
+	textarea {
+		@apply h-32 w-full rounded-lg border-2 border-silver p-4 font-sansSerif text-base;
+	}
+
+	select {
+		@apply border-silver border-2 rounded-lg h-14 w-full p-4 appearance-none bg-chevronDown bg-no-repeat bg-right-center
 	}
 
 	select:focus,
@@ -109,59 +36,30 @@
 	input[type="date"]:focus,
 	input[type="password"]:focus,
 	input[type="email"]:focus {
-		border: 2px solid var(--color-lavender-indigo);
-		outline: none;
+		@apply border-2 border-lavenderIndigo outline-none;
+	}
+
+	svg {
+		@apply fill-current
 	}
 }
 
 @layer components {
 	.invoice-table {
-		margin-bottom: 12px;
-		padding-inline: 16px;
-		width: 100%;
-		display: grid;
-		grid-template-columns: var(--invoice-table-mobile);
-		column-gap: 16px;
-	}
-
-	@media (min-width: 1024px) {
-		.invoice-table {
-			padding-inline: 24px;
-			grid-template-columns: var(--invoice-table);
-		}
+		@apply grid grid-cols-invoiceTableMobile lg:grid-cols-invoiceTable gap-x-4 px-4 lg:px-6 mb-3 w-full
 	}
 
 	.invoice-line-item {
-		display: grid;
-		grid-template-columns: var(--invoice-line-item);
-		column-gap: 20px;
+		@apply grid grid-cols-invoiceLineItem gap-x-5;
 	}
 
 	.field {
-		margin-bottom: 24px;
+		@apply mb-6;
 	}
-
-	.arrow-pointer-left {
-		background: url('/images/arrow-pointer-left.svg') no-repeat left top;
-	}
-
-	.arrow-pointer-right {
-		background: url('/images/arrow-pointer-right.svg') no-repeat right top;
-	}
-
-	.bg-circle {
-		background: url('/images/circle.svg') no-repeat;
-	}
-
-	/* 	.chevron-down {
-		background: url('/images/chevron--down.svg') no-repeat;
-	} */
 }
 
 @layer utilities {
 	.center {
-		display: flex;
-		justify-content: center;
-		align-items: center;
+		@apply flex items-center justify-center
 	}
 }
