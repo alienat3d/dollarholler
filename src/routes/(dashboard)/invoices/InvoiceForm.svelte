@@ -11,8 +11,10 @@
     amount: 0
   };
 
-  let lineItems: LineItem[] = [blankLineItem];
+  // Пока у нас копируется название первого инвойса в другие строки при добавлении новых строк, т.к. мы напрямую передаём "blankLineItem" в "lineItems", а это не совсем то, что нам нужно. Поэтому нам нужно делать копию "blankLineItem", вместо того, чтобы напрямую передавать сюда.
+  let lineItems: LineItem[] = [{ ...blankLineItem }];
 
+  // Creating unique IDs with UUID to be able sort out the selected line to delete in "RemoveLineItem()" func.
   const AddLineItem = () => {
     lineItems = [...lineItems, { ...blankLineItem, id: uuidv4() }];
   };

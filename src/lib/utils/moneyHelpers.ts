@@ -4,9 +4,9 @@
  * @returns {number}
  */
 export const sumLineItems = (lineItems: LineItem[] | undefined): number => {
-  if (!lineItems) return 0
-  return lineItems.reduce((prevValue, curValue) => prevValue + curValue.amount, 0)
-}
+  if (!lineItems) return 0;
+  return lineItems.reduce((prevValue, curValue) => prevValue + curValue.amount, 0);
+};
 
 /**
  * Takes and returns a dollar amount (USD), formatted with commas and 2 decimals places
@@ -17,7 +17,16 @@ export const centsToDollars = (cents: number): string => {
   const dollars = cents / 100;
   const addDecimals = twoDecimals(dollars);
   return addThousandsSeparator(addDecimals);
-}
+};
+
+/**
+ * Takes a dollar amount and converts it to cents.
+ * @param {number} dollars
+ * @return {number}
+ */
+export const dollarsToCents = (dollars: number): number => {
+  return dollars * 100;
+};
 
 /**
  * Takes a number and returns the number with 2 decimal places
@@ -25,8 +34,8 @@ export const centsToDollars = (cents: number): string => {
  * @returns {string}
  */
 export const twoDecimals = (myNum: number): string => {
-  return myNum.toFixed(2)
-}
+  return myNum.toFixed(2);
+};
 
 /**
  * Adds a thousands separator
@@ -34,8 +43,8 @@ export const twoDecimals = (myNum: number): string => {
  * @returns {string}
  */
 export const addThousandsSeparator = (myNum: string): string => {
-  return myNum.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-}
+  return myNum.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
 
 /**
  * Takes all the invoices and finds the total
@@ -43,9 +52,9 @@ export const addThousandsSeparator = (myNum: string): string => {
  * @returns {number}
  */
 export const sumInvoices = (invoices: Invoice[] | undefined): number => {
-  if (!invoices) return 0
+  if (!invoices) return 0;
   return invoices.reduce((prevValue, curValue) => {
     const invoiceSum = sumLineItems(curValue.lineItems);
     return prevValue + invoiceSum;
-  }, 0)
-}
+  }, 0);
+};
