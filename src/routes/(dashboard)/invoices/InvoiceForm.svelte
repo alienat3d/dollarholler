@@ -1,7 +1,25 @@
-<script>
+<script lang="ts">
 	import Button from '$lib/components/Button.svelte';
 	import CheckMark from '$lib/components/Icon/CheckMark.svelte';
 	import Trash from '$lib/components/Icon/Trash.svelte';
+	import LineItemRows from './LineItemRows.svelte';
+
+	const blankLineItem = {
+		id: '1',
+		description: '',
+		quantity: 0,
+		amount: 0
+	};
+
+	let lineItems: LineItem[] = [blankLineItem];
+
+	// Creating unique IDs with UUID to be able sort out the selected line to delete in "RemoveLineItem()" func.
+	const AddLineItem = () => {
+		lineItems = [...lineItems, { ...blankLineItem, id: `${lineItems.length + 1}` }];
+	};
+	const RemoveLineItem = (evt) => {
+		lineItems = lineItems.filter((item) => item.id !== evt.detail);
+	};
 </script>
 
 <h2 class="font-sans-serif text-daisy-bush mt-7 text-3xl font-bold">Add an Invoice</h2>
@@ -40,7 +58,9 @@
 		<input type="text" name="subject" />
 	</div>
 	<!-- line items -->
-	<div class="field col-span-6">Line Items</div>
+	<div class="field col-span-6">
+		<LineItemRows {lineItems} on:addLineItem={AddLineItem} on:removeLineItem={RemoveLineItem} />
+	</div>
 	<!-- notes -->
 	<div class="field col-span-6">
 		<label for="notes"
@@ -65,7 +85,7 @@
 			onClick={() => {}}
 			isAnimated={false}
 			iconLeft={Trash}
-			style="textOnly"
+			style="textOnlyDestructive"
 			label="Delete"
 		/>
 	</div>

@@ -4,7 +4,13 @@
 	export let label: string;
 	export let onClick: () => void;
 
-	export let style: 'primary' | 'secondary' | 'destructive' | 'outline' | 'textOnly' = 'primary';
+	export let style:
+		| 'primary'
+		| 'secondary'
+		| 'destructive'
+		| 'outline'
+		| 'textOnly'
+		| 'textOnlyDestructive' = 'primary';
 	export let isAnimated = true;
 
 	// Adding an ability to add icons on the left or on the right side of the button.
@@ -20,6 +26,7 @@
 	class:destructive={style === 'destructive'}
 	class:outline={style === 'outline'}
 	class:textOnly={style === 'textOnly'}
+	class:textOnlyDestructive={style === 'textOnlyDestructive'}
 	class="font-sans-serif text-md relative flex cursor-pointer items-center rounded-lg px-5 py-2 font-black whitespace-nowrap lg:px-10 lg:py-3 lg:text-xl"
 >
 	{#if iconLeft}<svelte:component this={iconLeft} className="mr-2" />{/if}
@@ -78,8 +85,20 @@
 		background-color: var(--color-daisy-bush) /* #4714a5 */;
 		color: var(--color-white) /* #fff */;
 	}
-	/* Same as: "bg-transparent px-0 text-scarlet underline" */
+	/* Same as: "bg-transparent px-0 text-lavender-indigo no-underline" */
 	.textOnly {
+		padding-left: 0;
+		padding-right: 0;
+		background-color: transparent;
+		color: var(--color-lavender-indigo) /* #f72f45 */;
+		text-decoration-line: none;
+	}
+	/* Same as: "hover:underline" */
+	.textOnly:hover {
+		text-decoration-line: underline;
+	}
+	/* Same as: "bg-transparent px-0 text-scarlet underline" */
+	.textOnlyDestructive {
 		padding-left: 0;
 		padding-right: 0;
 		background-color: transparent;
@@ -87,7 +106,7 @@
 		text-decoration-line: underline;
 	}
 	/* Same as: "hover:no-underline" */
-	.textOnly:hover {
+	.textOnlyDestructive:hover {
 		text-decoration-line: none;
 	}
 </style>
