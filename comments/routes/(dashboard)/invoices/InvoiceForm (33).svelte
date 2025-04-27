@@ -45,6 +45,7 @@
     {#if !isNewClient}
       <label for="client">Client</label>
       <div class="flex items-end gap-x-5">
+        <!-- 33.4.0 Здесь мы хотим, чтобы поле клиента было с атрибутом required только, если isNewClient в положении false, т.е. это известный клиент. -->
         <select name="client" id="client" required={!isNewClient}>
           <option />
           {#each $clients as client}
@@ -66,6 +67,7 @@
     {:else}
       <label for="newClient">New Client</label>
       <div class="flex items-end gap-x-5">
+        <!-- 33.4.1 А здесь, соответственно наоборот, поле ввода нового клиента должно быть required. -->
         <input type="text" name="newClient" required={isNewClient} />
         <div class="text-base font-bold leading-[3.5rem] text-monsoon">or</div>
         <div class="mb-0.5">
@@ -89,6 +91,7 @@
   </div>
 
   <!-- new client -->
+  <!-- 33.4.2 То же будет и для поля ввода электронной почты. -->
   {#if isNewClient}
     <div class="field col-span-6 grid gap-x-5" transition:slide>
       <div class="field col-span-6">
