@@ -1,3 +1,5 @@
+// 30.3 Здесь будут содержаться все 50 штатов Америки для селекта.
+// Go to [src\routes\(dashboard)\invoices\InvoiceForm.svelte]
 export const states = [
   {
     value: 'AK',
