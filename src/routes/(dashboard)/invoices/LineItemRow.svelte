@@ -5,6 +5,8 @@
 
   export let lineItem: LineItem;
   export let canDelete: boolean = false;
+  // 33.3.0 Создадим также специальный проп для этого...
+  export let isRequired: boolean = false;
 
   let unitPrice: string = twoDecimals(lineItem.amount / lineItem.quantity);
   let amount: string = twoDecimals(lineItem.amount);
@@ -19,7 +21,14 @@
 
 <div class="invoice-line-item border-b-2 border-fog py-2">
   <div>
-    <input class="line-item" type="text" name="description" bind:value={lineItem.description} />
+    <!-- 33.3.1 , чтобы потом использовать его на тех полях, где нужно.  -->
+    <input
+      class="line-item"
+      type="text"
+      name="description"
+      bind:value={lineItem.description}
+      required={isRequired}
+    />
   </div>
 
   <div>
@@ -34,6 +43,7 @@
         unitPrice = twoDecimals(Number(unitPrice));
         dispatch('updateLineItem');
       }}
+      required={isRequired}
     />
   </div>
 
@@ -47,6 +57,7 @@
       on:blur={() => {
         dispatch('updateLineItem');
       }}
+      required={isRequired}
     />
   </div>
 

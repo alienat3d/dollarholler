@@ -2,7 +2,7 @@
   import { clients, loadClients } from '$lib/stores/ClientStore';
   import { slide } from 'svelte/transition';
   import { v4 as uuidv4 } from 'uuid';
-  import LineItemRows from './LineItemRows.svelte';
+  import LineItemRows from '../../../../src/routes/(dashboard)/invoices/LineItemRows.svelte';
   import Button from '$lib/components/Button.svelte';
   import Trash from '$lib/components/Icon/Trash.svelte';
   import { states } from '$lib/utils/states';
@@ -123,12 +123,15 @@
   {/if}
 
   <!-- due date -->
+  <!-- 33.1.0 Дальше мы установим в поле выбора даты минимальное число - значение переменной "today". -->
   <div class="field col-span-2">
     <label for="dueDate">Due Date</label>
     <input type="date" name="dueDate" min={today} required />
   </div>
 
   <!-- issue date -->
+  <!-- 33.1.1 То же сделаем и для этого поля. -->
+  <!-- Go to [src\routes\(dashboard)\invoices\LineItemRows.svelte] -->
   <div class="field col-span-2 col-start-5">
     <label for="issueDate">Issue Date</label>
     <input type="date" name="issueDate" min={today} />
@@ -181,6 +184,7 @@
   </div>
   <div class="field col-span-4 flex justify-end gap-x-5">
     <Button label="Cancel" style="secondary" isAnimated={false} onClick={() => {}} />
+    <!-- Меняем компонент кнопки "Save" на обычную HTML-версию кнопки, т.к. по умолчанию у Button стоит модификатор на событии клика "preventDefault" и до события Submit не доходит. -->
     <button
       class="button translate-y-0 bg-lavenderIndigo text-white shadow-colored transition-all hover:-translate-y-2 hover:shadow-coloredHover"
       type="submit">Save</button

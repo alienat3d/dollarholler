@@ -2,7 +2,7 @@
   import { createEventDispatcher } from 'svelte';
   import Button from '$lib/components/Button.svelte';
   import CircledAmount from '$lib/components/CircledAmount.svelte';
-  import LineItemRow from './LineItemRow.svelte';
+  import LineItemRow from '../../../../src/routes/(dashboard)/invoices/LineItemRow.svelte';
   import { centsToDollars, sumLineItems, twoDecimals } from '$lib/utils/moneyHelpers';
 
   let subtotal: string = '0.00';
@@ -31,6 +31,8 @@
   <div class="table-header text-right">Amount</div>
 </div>
 
+<!-- 33.2 Теперь мы хотим поставить атрибут "required" но только первому полю инвойса, для этого мы запишем "isRequired" похожим образом, как мы делали с "canDelete": -->
+<!-- Go to [src\routes\(dashboard)\invoices\LineItemRow.svelte] -->
 {#if lineItems}
   {#each lineItems as lineItem, index}
     <LineItemRow
