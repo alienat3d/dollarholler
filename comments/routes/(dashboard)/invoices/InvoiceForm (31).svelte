@@ -1,8 +1,9 @@
 <script lang="ts">
+  // 32.3.0 Импортируем свежесозданное хранилище...
   import { clients, loadClients } from '$lib/stores/ClientStore';
   import { slide } from 'svelte/transition';
   import { v4 as uuidv4 } from 'uuid';
-  import LineItemRows from './LineItemRows.svelte';
+  import LineItemRows from '../../../../src/routes/(dashboard)/invoices/LineItemRows.svelte';
   import Button from '$lib/components/Button.svelte';
   import Trash from '$lib/components/Icon/Trash.svelte';
   import { states } from '$lib/utils/states';
@@ -31,6 +32,7 @@
     lineItems = lineItems;
   };
 
+  // 32.3.1 ..., а затем используем его в жизненном цикле onMount
   onMount(() => {
     loadClients();
   });
@@ -45,6 +47,7 @@
       <label for="client">Client</label>
       <div class="flex items-end gap-x-5">
         <select name="client" id="client">
+          <!-- 32.4 Как и с американскими штатами в прошлом уроке используем цикл "each", чтобы распечатать всех имеющихся клиентов. -->
           {#each $clients as client}
             <option value={client.id}>{client.name}</option>
           {/each}
@@ -66,16 +69,16 @@
       <div class="flex items-end gap-x-5">
         <input type="text" name="newClient" />
         <div class="text-base font-bold leading-[3.5rem] text-monsoon">or</div>
-        <div class="mb-0.5">
-          <Button
-            label="Existing Client"
-            onClick={() => {
-              isNewClient = false;
-            }}
-            style="outline"
-            isAnimated={false}
-          />
-        </div>
+        <!-- <div class="mb-0.5"> -->
+        <Button
+          label="Existing Client"
+          onClick={() => {
+            isNewClient = false;
+          }}
+          style="outline"
+          isAnimated={false}
+        />
+        <!-- </div> -->
       </div>
     {/if}
   </div>
