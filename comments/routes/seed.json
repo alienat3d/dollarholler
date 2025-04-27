@@ -1,0 +1,140 @@
+{
+	"invoices": [
+		{
+			"client": {
+				"clientStatus": "active",
+				"city": "Moscow",
+				"email": "zaplin.dev@gmail.com",
+				"id": "1",
+				"name": "Al Zaplin",
+				"state": "Moscow Region",
+				"street": "Tulskaya",
+				"zipCode": "115333"
+			},
+			"createdAt": "2025-03-11",
+			"dueDate": "2025-04-30",
+			"id": "1",
+			"invoiceNumber": "12345",
+			"invoiceStatus": "draft",
+			"issueDate": "2025-03-11",
+			"lineItems": [
+				{
+					"amount": 25500,
+					"description": "Coding a Website",
+					"id": "1",
+					"quantity": 1
+				},
+				{
+					"amount": 9150,
+					"description": "Bugfixing",
+					"id": "2",
+					"quantity": 1
+				}
+			],
+			"notes": "**This** please.",
+			"subject": "The Dollar Holler website",
+			"terms": "_Pay_ me."
+		},
+		{
+			"client": {
+				"clientStatus": "active",
+				"city": "Moscow",
+				"email": "zaplin.dev@gmail.com",
+				"id": "1",
+				"name": "Al Zaplin",
+				"state": "Moscow Region",
+				"street": "Tulskaya",
+				"zipCode": "115333"
+			},
+			"createdAt": "2025-03-10",
+			"dueDate": "2025-03-17",
+			"id": "2",
+			"invoiceNumber": "12346",
+			"invoiceStatus": "draft",
+			"issueDate": "2025-03-18",
+			"lineItems": [
+				{
+					"amount": 1150,
+					"description": "Setting up domain & hosting",
+					"id": "3",
+					"quantity": 1
+				},
+				{
+					"amount": 3250,
+					"description": "Creating a Design",
+					"id": "4",
+					"quantity": 1
+				}
+			],
+			"subject": "The Dollar Holler website"
+		},
+		{
+			"client": {
+				"clientStatus": "active",
+				"city": "New York",
+				"email": "jamie.barrel@gmail.com",
+				"id": "2",
+				"name": "Jamie Barrel",
+				"state": "NY",
+				"street": "123 Main Street",
+				"zipCode": "112263"
+			},
+			"createdAt": "2025-02-12",
+			"dueDate": "2025-03-11",
+			"id": "3",
+			"invoiceNumber": "12347",
+			"invoiceStatus": "sent",
+			"issueDate": "2025-03-03",
+			"lineItems": [
+				{
+					"amount": 1125,
+					"description": "Setting up domain & hosting",
+					"id": "5",
+					"quantity": 1
+				},
+				{
+					"amount": 200550,
+					"description": "Creating a Website",
+					"id": "6",
+					"quantity": 1
+				}
+			],
+			"subject": "The Jamie’s Toolkit Website"
+		},
+		{
+			"client": {
+				"clientStatus": "active",
+				"city": "Anywhereville",
+				"email": "zeal@example.com",
+				"id": "3",
+				"name": "ZEAL",
+				"state": "CA",
+				"street": "789 Common Drive",
+				"zipCode": "56789"
+			},
+			"createdAt": "2025-02-10",
+			"dueDate": "2025-05-11",
+			"id": "4",
+			"invoiceNumber": "12230",
+			"invoiceStatus": "sent",
+			"issueDate": "2025-02-25",
+			"lineItems": [
+				{
+					"amount": 150000,
+					"description": "General project",
+					"id": "6",
+					"quantity": 1
+				},
+				{
+					"amount": 10550,
+					"description": "Small addition to the general project",
+					"id": "7",
+					"quantity": 3
+				}
+			],
+			"notes": "**This** please.",
+			"subject": "ZEAL Co. Portal Website",
+			"terms": "_Pay_ me."
+		}
+	]
+}

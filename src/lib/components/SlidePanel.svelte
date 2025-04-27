@@ -1,31 +1,29 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
-	import ArrowLeft from './Icon/ArrowLeft.svelte';
-	import Overlay from './Overlay.svelte';
-	import Portal from './Portal.svelte';
+  import { createEventDispatcher } from 'svelte';
+  import Portal from '$lib/components/Portal.svelte';
+  import Arrow from './Icon/Arrow.svelte';
+  import Overlay from './Overlay.svelte';
 
-	// We have to make sure that the parent component of this one know about we clicked the "Close"-button in order to remove it, so we’ll use dispatch again here.
-	const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher();
 </script>
 
-<!-- Also setup a functionality for closing via "Escape" key on keyboard. -->
 <svelte:window
-	on:keydown={(evt) => {
-		if (evt.key === 'Escape') dispatch('close');
-	}}
+  on:keydown={(event) => {
+    if (event.key === 'Escape') {
+      dispatch('close');
+    }
+  }}
 />
 
 <Portal>
-	<Overlay />
-	<div
-		class="fixed top-0 right-0 z-[--slide-panel] h-screen w-3/4 overflow-y-scroll bg-white px-32 py-20 shadow-[--shadow-slide-panel]"
-	>
-		<button
-			on:click={() => dispatch('closePanel')}
-			class="text-pastel-purple hover:text-daisy-bush absolute top-5 left-7 cursor-pointer transition-colors"
-		>
-			<ArrowLeft />
-		</button>
-		<slot></slot>
-	</div>
+  <Overlay />
+  <div
+    class="fixed right-0 top-0 z-slidePanel h-screen w-3/4 overflow-y-scroll bg-white py-20 px-32 shadow-slidePanel"
+  >
+    <button
+      class="absolute top-5 left-7 text-pastelPurple hover:text-daisyBush"
+      on:click={() => dispatch('closePanel')}><Arrow /></button
+    >
+    <slot><!-- optional fallback --></slot>
+  </div>
 </Portal>
