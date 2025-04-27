@@ -11,10 +11,8 @@
     amount: 0
   };
 
-  // Пока у нас копируется название первого инвойса в другие строки при добавлении новых строк, т.к. мы напрямую передаём "blankLineItem" в "lineItems", а это не совсем то, что нам нужно. Поэтому нам нужно делать копию "blankLineItem", вместо того, чтобы напрямую передавать сюда.
   let lineItems: LineItem[] = [{ ...blankLineItem }];
 
-  // Creating unique IDs with UUID to be able sort out the selected line to delete in "RemoveLineItem()" func.
   const AddLineItem = () => {
     lineItems = [...lineItems, { ...blankLineItem, id: uuidv4() }];
   };
@@ -22,6 +20,12 @@
   const RemoveLineItem = (event) => {
     lineItems = lineItems.filter((item) => item.id !== event.detail);
     console.log('remove line item');
+  };
+
+  // 29.5 Присваиваем новое значение lineItems старому, чтобы оно было реактивным.
+  // Go to [src\routes\(dashboard)\invoices\LineItemRows.svelte]
+  const UpdateLineItem = () => {
+    lineItems = lineItems;
   };
 </script>
 
@@ -65,8 +69,14 @@
   </div>
 
   <!-- line items -->
+  <!-- 29.4 И здесь уже запустим метод "UpdateLineItem" по сигналу нашего кастомного эвента из дочернего комп. "LineItemRow". ↑ -->
   <div class="field col-span-6">
-    <LineItemRows {lineItems} on:addLineItem={AddLineItem} on:removeLineItem={RemoveLineItem} />
+    <LineItemRows
+      {lineItems}
+      on:addLineItem={AddLineItem}
+      on:removeLineItem={RemoveLineItem}
+      on:updateLineItem={UpdateLineItem}
+    />
   </div>
 
   <!-- notes -->

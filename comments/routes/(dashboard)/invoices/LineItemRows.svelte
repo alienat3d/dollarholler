@@ -3,9 +3,17 @@
   import Button from '$lib/components/Button.svelte';
   import CircledAmount from '$lib/components/CircledAmount.svelte';
   import LineItemRow from './LineItemRow.svelte';
+  import { sumLineItems, centsToDollars } from '$lib/utils/moneyHelpers';
+
+  // * 29.0 Создадим переменную и поместим в неё изначальное значение равное "0.00".
+  let subtotal: string = '0.00';
 
   export let lineItems: LineItem[] | undefined = undefined;
+
   let dispatch = createEventDispatcher();
+
+  // 29.1 Сделаем "subtitle" реактивным, записав его в спец. синтаксис со знаком $. Чтобы, если какая-то из строк изменится, то и значение subtotal должно обновиться. Теперь все строки "lineItems" будут складываться.
+  $: subtotal = centsToDollars(sumLineItems(lineItems));
 </script>
 
 <div class="invoice-line-item border-b-2 border-daisyBush pb-2">
@@ -34,7 +42,7 @@
     />
   </div>
   <div class="py-5 text-right font-bold text-monsoon">Subtotal</div>
-  <div class="py-5 text-right font-mono">$250.00</div>
+  <div class="py-5 text-right font-mono">${subtotal}</div>
 </div>
 
 <div class="invoice-line-item">
@@ -53,9 +61,9 @@
 </div>
 
 <div class="invoice-line-item">
-  <div class="col-span-6">
+  <!-- <div class="col-span-6">
     <CircledAmount label="Total:" amount="$1,444.00" />
-  </div>
+  </div> -->
 </div>
 
 <style lang="postcss">

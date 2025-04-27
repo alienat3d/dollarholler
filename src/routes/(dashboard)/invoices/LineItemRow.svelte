@@ -1,21 +1,14 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import { dollarsToCents, twoDecimals } from '$lib/utils/moneyHelpers';
   import Trash from '$lib/components/Icon/Trash.svelte';
+  import { twoDecimals, dollarsToCents } from '$lib/utils/moneyHelpers';
 
   export let lineItem: LineItem;
-
-  // 28.0 Вообще, для лучшего UX было бы хорошо, если бы мы могли удалять все линии инвойсов, кроме самого первого. Для этой задачи мы добавим контролер "canDelete", который будет определять, можно ли удалить эту линию или нет. И теперь нам нужно передать этот проп в родительский [LineItemRows.svelte]
   export let canDelete: boolean = false;
 
-  // Мы помним, что у Quantity, Unit Price & Amount есть взаимосвязь и Quantity * Unit Price = Amount, т.ч. нам не нужно хранить их все в БД. Сделаем так, что когда мы будем менять Quantity или Unit Price, то и Amount будет меняться автоматически. Для этого пропишем здесь эту формулу. Мы также можем использовать, сделанную нами раньше, функцию, которая обрезает дроби до двух после точки.
   let unitPrice: string = twoDecimals(lineItem.amount / lineItem.quantity);
-
-  // Также у нас будет отдельная переменная под Amount. И мы также хотим, чтобы amount обновлялось каждый раз, когда значение Unit Price и/или Qty. поменяются.
   let amount: string = twoDecimals(lineItem.amount);
 
-  // В Svelte можно объявить часть кода реактивным с помощью знака $. И это значит, что Svelte перезапустит этот код каждый раз, когда значение переменных в нём поменяется. (Похоже на useEffect в React)
-  // А также обновим и lineItem.amount, чтобы тут же синхронизировать данные. Но также не забудем, что мы храним это значение уже только в центах и для этого используем ещё одну новую функцию-помощника "dollarsToCents".
   $: {
     amount = twoDecimals(lineItem.quantity * Number(unitPrice));
     lineItem.amount = dollarsToCents(Number(amount));
@@ -29,39 +22,46 @@
     <input class="line-item" type="text" name="description" bind:value={lineItem.description} />
   </div>
 
-  <!-- Также при помощи события смены фокуса "on:blur" мы сделаем так, что значение переформатируется в доллары и центы после точки. -->
   <div>
+    <!-- 29.2 Пока у нас обновляется сумма только при добавлении или удалении записей, но нам бы хотелось сделать, чтобы это происходило сразу же при изменении цен или количества товаров в каждой записи. Поэтому мы создадим ещё кастомное событие "updateLineItem", которое в этом поможет. -->
     <input
-      bind:value={unitPrice}
-      on:blur={() => (unitPrice = twoDecimals(Number(unitPrice)))}
       class="line-item text-right"
       type="number"
       name="unitPrice"
       step="0.01"
       min="0"
+      bind:value={unitPrice}
+      on:blur={() => {
+        unitPrice = twoDecimals(Number(unitPrice));
+        dispatch('updateLineItem');
+      }}
     />
   </div>
 
   <div>
+    <!-- 29.3 Тоже самое сделаем и у кол-ва товаров. -->
+    <!-- Go to [src\routes\(dashboard)\invoices\LineItemRows.svelte] -->
     <input
-      bind:value={lineItem.quantity}
       class="line-item text-center"
       type="number"
       name="quantity"
       min="0"
+      bind:value={lineItem.quantity}
+      on:blur={() => {
+        dispatch('updateLineItem');
+      }}
     />
   </div>
 
-  <!-- Это поле у нас будет недоступным для ручного ввода и будет вычисляться автоматически. -->
   <div>
     <input
-      bind:value={amount}
-      disabled
       class="line-item text-right"
       type="number"
       name="amount"
       step="0.01"
       min="0"
+      bind:value={amount}
+      disabled
     />
   </div>
 
@@ -96,8 +96,8 @@
     @apply border-solid border-lavenderIndigo outline-none;
   }
 
-  input[type='text']:disabled,
-  input[type='number']:disabled {
+  input[type='number']:disabled,
+  input[type='text']:disabled {
     @apply border-b-0 bg-transparent px-0;
   }
 </style>
