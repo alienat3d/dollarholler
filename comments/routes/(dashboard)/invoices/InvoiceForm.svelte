@@ -23,6 +23,12 @@
     lineItems = lineItems.filter((item) => item.id !== event.detail);
     console.log('remove line item');
   };
+
+  // 29.5 Присваиваем новое значение lineItems старому, чтобы оно было реактивным.
+  // Go to [src\routes\(dashboard)\invoices\LineItemRows.svelte]
+  const UpdateLineItem = () => {
+    lineItems = lineItems;
+  };
 </script>
 
 <h2 class="mb-7 font-sansSerif text-3xl font-bold text-daisyBush">Add an Invoice</h2>
@@ -65,8 +71,14 @@
   </div>
 
   <!-- line items -->
+  <!-- 29.4 И здесь уже запустим метод "UpdateLineItem" по сигналу нашего кастомного эвента из дочернего комп. "LineItemRow". ↑ -->
   <div class="field col-span-6">
-    <LineItemRows {lineItems} on:addLineItem={AddLineItem} on:removeLineItem={RemoveLineItem} />
+    <LineItemRows
+      {lineItems}
+      on:addLineItem={AddLineItem}
+      on:removeLineItem={RemoveLineItem}
+      on:updateLineItem={UpdateLineItem}
+    />
   </div>
 
   <!-- notes -->
