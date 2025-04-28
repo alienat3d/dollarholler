@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { SvelteComponent } from 'svelte';
+  import type { SvelteComponent } from 'svelte';
   export let label: string;
   export let onClick: () => void;
   export let style:

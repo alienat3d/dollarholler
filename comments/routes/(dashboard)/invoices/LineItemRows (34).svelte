@@ -6,6 +6,8 @@
   import { centsToDollars, sumLineItems, twoDecimals } from '$lib/utils/moneyHelpers';
 
   let subtotal: string = '0.00';
+  // 34.10 Т.к. нам нужно иметь доступ к discount снаружи, то сделаем из него проп при помощи "export" и по умолчанию значение будет 0.
+  // Go to [src\routes\(dashboard)\invoices\InvoiceForm.svelte]
   export let discount: number = 0;
   let discountedAmount: string = '0.00';
   let total: string = '0.00';
@@ -20,6 +22,8 @@
     discountedAmount = centsToDollars(sumLineItems(lineItems) * (discount / 100));
   }
 
+  // 34.6 Устраним баг, т.к. раньше у нас здесь стояло parseInt, то при переводе из строки в числовой тип данных также обрезались дроби, а это нас не устраивает, поэтому лучше заменить на Number.
+  // Go to [src\routes\(dashboard)\invoices\InvoiceForm.svelte]
   $: total = twoDecimals(Number(subtotal) - Number(discountedAmount));
 </script>
 

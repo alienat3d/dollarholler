@@ -62,6 +62,8 @@
 </div>
 
 <!-- slide panel -->
+<!-- 34.16.0 Здесь мы добавим комп. InvoiceForm "closePanel", которая сработает, когда isInvoiceFormShowing в положении false. -->
+<!-- Go to [src\routes\(dashboard)\invoices\InvoiceForm.svelte] -->
 {#if isInvoiceFormShowing}
   <SlidePanel
     on:closePanel={() => {

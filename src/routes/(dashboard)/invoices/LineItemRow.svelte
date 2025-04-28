@@ -5,7 +5,6 @@
 
   export let lineItem: LineItem;
   export let canDelete: boolean = false;
-  // 33.3.0 Создадим также специальный проп для этого...
   export let isRequired: boolean = false;
 
   let unitPrice: string = twoDecimals(lineItem.amount / lineItem.quantity);
@@ -21,7 +20,6 @@
 
 <div class="invoice-line-item border-b-2 border-fog py-2">
   <div>
-    <!-- 33.3.1 , чтобы потом использовать его на тех полях, где нужно.  -->
     <input
       class="line-item"
       type="text"
