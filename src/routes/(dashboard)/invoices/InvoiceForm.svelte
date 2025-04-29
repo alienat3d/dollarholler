@@ -79,7 +79,9 @@
   <div class="field col-span-6 md:col-span-4">
     {#if !isNewClient}
       <label for="client">Client</label>
-      <div class="flex flex-wrap items-end gap-x-2 sm:flex-nowrap md:gap-x-5">
+      <div
+        class="flex flex-wrap items-end justify-center gap-x-5 sm:flex-nowrap sm:justify-start md:gap-x-5"
+      >
         <select
           id="client"
           class="mb-4 sm:mb-0"
@@ -121,7 +123,7 @@
           bind:value={newClient.name}
         />
         <div class="text-base font-bold leading-[2.6rem] text-monsoon lg:leading-[3.5rem]">or</div>
-        <div class="mb-0.5">
+        <div class="self-center">
           <Button
             label="Existing Client"
             onClick={() => {
@@ -139,7 +141,13 @@
   <!-- invoice id -->
   <div class="field col-span-6 row-start-1 md:col-span-2 md:row-start-auto">
     <label for="invoiceNumber">Invoice ID</label>
-    <input type="number" name="invoiceNumber" required bind:value={invoice.invoiceNumber} />
+    <input
+      class="mt-0.5"
+      type="number"
+      name="invoiceNumber"
+      required
+      bind:value={invoice.invoiceNumber}
+    />
   </div>
 
   <!-- new client -->
