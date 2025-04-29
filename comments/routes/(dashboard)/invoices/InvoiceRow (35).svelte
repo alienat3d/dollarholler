@@ -23,13 +23,12 @@
     isAdditionalMenuShowing = false;
     console.log('deleting');
   };
-
+  // 35.1 Добавим по клику на кнопку "Edit", чтобы панель формы показывалась. А также нужно скрывать меню, как только мы нажмём на неё. ↓
   const handleEdit = () => {
     console.log('editing');
     isInvoiceFormShowing = true;
     isAdditionalMenuShowing = false;
   };
-
   const handleSendInvoice = () => {
     console.log('sending');
   };
@@ -84,8 +83,17 @@
   </div>
 </div>
 
+<!-- 35.9.1 И теперь на место, где было модальное окно мы вставим комп. модального окна ConfirmDelete. Добавим в него invoice, а также isModalShowing. -->
+<!-- Go to [src\routes\(dashboard)\invoices\ConfirmDelete.svelte] -->
+<!-- 35.11 А здесь мы слушаем событие, которые создали диспатчером, т.е. "close" и здесь мы уже будем менять значение "isModalShowing". -->
+<!-- Go to [src\routes\(dashboard)\invoices\InvoiceForm.svelte] -->
 <ConfirmDelete {invoice} {isModalShowing} on:close={() => (isModalShowing = false)} />
 
+<!-- * 35.0 Итак, теперь оживим кнопку "Edit", точнее, чтобы по клику на неё была возможность редактировать каждый уже созданный ранее инвойс. И для начала скопируем часть "slide panel" из [src\routes\(dashboard)\invoices\+page.svelte] сюда и поправим ошибки. ↑ -->
+<!-- 35.2 Также в InvoiceForm комп. нам нужно передавать данные из того инвойса, по которому мы кликнули кнопку "Edit", чтобы заполнить ими форму для редактирования. И у нас уже создан проп invoice, т.ч. можно его просто туда передать. -->
+<!-- Go to [src\routes\(dashboard)\invoices\InvoiceForm.svelte] -->
+<!-- 35.4.1 Также добавим теперь formState, что он должен быть в значении "edit". -->
+<!-- Go to [src\routes\(dashboard)\invoices\InvoiceForm.svelte] -->
 <!-- slide panel -->
 {#if isInvoiceFormShowing}
   <SlidePanel

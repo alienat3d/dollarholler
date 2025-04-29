@@ -19,6 +19,7 @@
   };
 
   let isNewClient: boolean = false;
+  // 35.3 Чтобы исправить ошибку с передачей invoice в "InvoiceRow" комп. сделаем его пропом
   export let invoice: Invoice = {
     client: {} as Client,
     lineItems: [{ ...blankLineItem }] as LineItem[]
@@ -26,6 +27,8 @@
 
   let newClient: Partial<Client> = {};
 
+  // 35.4.0 Нам также понадобится переменная formState, которая будет индикатором какое состояние принимает наша форма создание или редактирование. Также запишем оба эти состояния и по умолчанию будет "create".
+  // Go to [src\routes\(dashboard)\invoices\InvoiceRow.svelte]
   export let formState: 'create' | 'edit' = 'create';
 
   export let closePanel: () => void = () => {};
@@ -46,6 +49,8 @@
     invoice.lineItems = invoice.lineItems;
   };
 
+  // 35.7 Здесь нам также нужно сделать, что состояние формы определит какое действие мы будем выполнять. И если состояние 'create', то мы создаём инвойс, а если 'edit', то сохраняем старый с изменёнными данными. Но теперь нам также надо создать новую функцию "updateInvoice" в хранилище [src\lib\stores\InvoiceStore.ts]
+  // Go to [src\lib\stores\InvoiceStore.ts]
   const handleSubmit = () => {
     if (isNewClient) {
       invoice.client = newClient as Client;
@@ -66,6 +71,7 @@
   });
 </script>
 
+<!-- 35.5 Теперь займёмся заголовками. Т.к. у нас теперь два состояния формы, то логично менять заголовок в зависимости от состояния формы. Используем условие. -->
 <h2 class="mb-7 font-sansSerif text-3xl font-bold text-daisyBush">
   {#if formState === 'create'}Add{:else}Edit{/if} an Invoice
 </h2>
@@ -221,6 +227,11 @@
   </div>
 
   <!-- buttons -->
+  <!-- 35.6 Также нам нужно показывать кнопку удаления только, когда форма в состоянии "edit". -->
+  <!-- 35.13 Также нужно добавить и здесь в onClick, чтобы показывалась модалка подтверждения удаления. -->
+  <!-- 35.14 И всё вроде работает, но у нас новая проблемка - когда мы в форме редактирования инвойса, то при появлении модального окна подтверждения удаления инвойса не показывается подложка-затемняющая всё за модалкой. Чтобы это починить нужно перейти в настройки TailwindCSS. -->
+  <!-- Go to [tailwind.config.cjs] -->
+  <!-- Go to [src\lib\components\Overlay.svelte] -->
   <div class="field col-span-2">
     {#if formState === 'edit'}
       <Button
@@ -248,6 +259,8 @@
   </div>
 </form>
 
+<!-- 35.12 Мы также добавим наш новый комп. и сюда в конце формы, т.к. у нас есть и здесь модалка удаления инвойса. -->
+<!-- 35.16 И последнее в этом уроке — нам нужно добавить также на onClick метод "closePanel", чтобы скрывать панель после удаления инвойса. -->
 <ConfirmDelete
   {invoice}
   {isModalShowing}

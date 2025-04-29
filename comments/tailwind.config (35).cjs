@@ -51,7 +51,7 @@ module.exports = {
       },
       zIndex: {
         modal: 999,
-        modalOverlay: 998,
+        modalOverlay: 998 /* нужно добавить доп. z-index для подложки и чуть-чуть изменить уровни ниже */,
         slidePanel: 997,
         overlay: 996,
         navBarToggle: 91,
