@@ -60,6 +60,8 @@
 <div class="invoice-line-item">
   <div class="col-span-2 py-5 text-right font-bold text-monsoon">Discount</div>
   <div class="relative">
+    <!-- 36.4 И добавим по событию "change" создание события "updateDiscount", а также передадим значение в объекте discount. -->
+    <!-- Go to [src\lib\utils\moneyHelpers.ts] -->
     <input
       class="line-item h-10 w-full border-b-2 border-dashed border-stone-300 pr-4 text-right focus:border-solid focus:border-lavenderIndigo focus:outline-none"
       type="number"

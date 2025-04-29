@@ -7,6 +7,8 @@
   export let canDelete: boolean = false;
   export let isRequired: boolean = false;
 
+  // 36.0 Починим баг с подставлением огромных чисел во время редактирования инвойса поменяв методы twoDecimals на centsToDollars, чтобы они показывались в долларах, а не центах.
+  // Go to [src\routes\(dashboard)\invoices\InvoiceForm.svelte]
   let unitPrice: string = centsToDollars(lineItem.amount / lineItem.quantity);
   let amount: string = centsToDollars(lineItem.amount);
 

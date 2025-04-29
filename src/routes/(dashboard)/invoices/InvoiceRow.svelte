@@ -1,6 +1,6 @@
 <script lang="ts">
   import { convertDate, isLate } from '$lib/utils/dateHelpers';
-  import { sumLineItems, centsToDollars } from '$lib/utils/moneyHelpers';
+  import { centsToDollars, invoiceTotal } from '$lib/utils/moneyHelpers';
   import AdditionalOptions from '$lib/components/AdditionalOptions.svelte';
   import ThreeDots from '$lib/components/Icon/ThreeDots.svelte';
   import View from '$lib/components/Icon/View.svelte';
@@ -21,11 +21,9 @@
   const handleDelete = () => {
     isModalShowing = true;
     isAdditionalMenuShowing = false;
-    console.log('deleting');
   };
 
   const handleEdit = () => {
-    console.log('editing');
     isInvoiceFormShowing = true;
     isAdditionalMenuShowing = false;
   };
@@ -60,7 +58,7 @@
     {invoice.client.name}
   </div>
   <div class="amount text-right font-mono text-sm font-bold lg:text-lg">
-    ${centsToDollars(sumLineItems(invoice.lineItems))}
+    ${centsToDollars(invoiceTotal(invoice.lineItems, invoice.discount))}
   </div>
   <div class="center viewButton hidden text-sm lg:flex lg:text-lg">
     <a href="#" class="text-pastelPurple hover:text-daisyBush"><View /></a>

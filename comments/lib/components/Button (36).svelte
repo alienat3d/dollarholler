@@ -25,6 +25,7 @@
   class:textOnlyDestructive={style === 'textOnlyDestructive'}
   class:isAnimated
 >
+  <!-- 36.6 Последнее, что мы починим в этом уроке — избавимся от предупреждения в консоли "<Trash> was created with unknown prop 'class'". Для этого просто обернём их в div и дадим ему утилитарные классы этих стилей. -->
   {#if iconLeft}
     <div class="mr-2">
       <svelte:component this={iconLeft} />

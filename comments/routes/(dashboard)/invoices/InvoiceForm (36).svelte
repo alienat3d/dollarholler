@@ -32,6 +32,7 @@
 
   let isModalShowing: boolean = false;
 
+  // 36.1 Починим также обновление значения дискаунта, чтобы оно также обновлялось с сохранением редактирования инвойса. Для этого создадим переменную. ↓
   const initialDiscount = invoice.discount || 0;
 
   export const AddLineItem = () => {
@@ -63,6 +64,7 @@
     closePanel();
   };
 
+  // 36.2 Также создадим функцию, которая будет обновлять дисконт, присваивая текущее значение через событие в хранилище.
   const UpdateDiscount = (event: CustomEvent) => (invoice.discount = event.detail.discount);
 
   onMount(() => {
@@ -196,6 +198,8 @@
 
   <!-- line items -->
   <div class="field col-span-6">
+    <!-- 36.3 Ну и добавим собственно само событие компоненту "UpdateDiscount". -->
+    <!-- Go to [src\routes\(dashboard)\invoices\LineItemRows.svelte] -->
     <LineItemRows
       discount={initialDiscount}
       lineItems={invoice.lineItems}

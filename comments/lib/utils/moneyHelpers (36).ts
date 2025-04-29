@@ -8,6 +8,8 @@ export const sumLineItems = (lineItems: LineItem[] | undefined): number => {
   return lineItems.reduce((prevValue, curValue) => prevValue + curValue.amount, 0);
 };
 
+// 36.5 Также мы обнаружили баг, что общая сумма считает немного неправильно не учитывая дисконт, мы исправим это новой функцией, которая будет принимать сумму всех полей функцией sumLineItems и потом, если у нас есть discount, то будем из суммы вычитать значение скидки найденное по формуле, а если нет, то просто возвращать сумму инвойсов.
+// Go to [src\lib\components\Button.svelte]
 /**
  * Takes the lineItems and discount and determines the invoice total
  * @param {Array|undefined} lineItems
