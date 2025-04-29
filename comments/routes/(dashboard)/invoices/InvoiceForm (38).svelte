@@ -49,6 +49,8 @@
     invoice.lineItems = invoice.lineItems;
   };
 
+  // 38.16 Итак, нам нужно показывать всплывающие сообщения комп. Snackbar, когда у нас создаются, редактируются и сохраняются, либо удаляются сообщения. Этим мы и займёмся. Когда у нас здесь создаётся инвойс, то добавим также запуск функции хранилища snackbar send().
+  // Go to [src\routes\(dashboard)\invoices\ConfirmDelete.svelte]
   const handleSubmit = () => {
     if (isNewClient) {
       invoice.client = newClient as Client;

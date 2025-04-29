@@ -1,3 +1,5 @@
+// 34.9 Мы также забыли добавить discount (он будет опциональным, поэтому с "?") в тип Invoice, поэтому сделаем это.
+// Go to [src\routes\(dashboard)\invoices\LineItemRows.svelte]
 interface Invoice {
   client: Client;
   createdAt: string;
@@ -33,6 +35,8 @@ interface Client {
 
 type NotificationType = 'info' | 'warning' | 'error' | 'success';
 
+// 38.6 Создадим также здесь интерфейс для нового хранилища Snackbar. Каждое такое сообщение будет состоять из id, message и type (которому мы напишем отдельно тип выше).
+// Go to [src\lib\stores\SnackbarStore.ts]
 interface Snackbar {
   id: string;
   message: string;

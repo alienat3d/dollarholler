@@ -19,6 +19,7 @@
       <span class="text-scarlet">{invoice.client.name}</span> for
       <span class="text-scarlet">${centsToDollars(sumLineItems(invoice.lineItems))}</span>?
     </div>
+    <!-- 38.17 И здесь аналогично тому, как было в предыдущем примере в [src\routes\(dashboard)\invoices\InvoiceForm.svelte], когда мы нажимаем удалить инвойс, то запускаем метод snackbar.send() -->
     <div class="flex gap-4">
       <Button
         isAnimated={false}
