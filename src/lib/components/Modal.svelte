@@ -18,7 +18,9 @@
 
 {#if isVisible}
   <Portal>
-    <Overlay />
+    <!-- 35.15.2 И добавим в Overlay комп. этот класс. А чтобы он не конфликтовал с оригинальным "z-overlay" внутри комп. Overlay, то мы можем добавить "!" этому классу, сделав его "!important" -->
+    <!-- Go to [src\routes\(dashboard)\invoices\InvoiceForm.svelte] -->
+    <Overlay className="!z-modalOverlay" />
     <div class="center fixed inset-0 z-modal">
       <div class="relative min-h-[230px] w-full max-w-[450px] rounded-lg bg-white px-10 py-7">
         <button

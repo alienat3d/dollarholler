@@ -18,7 +18,7 @@ module.exports = {
         'right-center': '97% center'
       },
       borderWidth: {
-        '1': '1px',
+        1: '1px'
       },
       boxShadow: {
         colored: '0px 7px 16px rgba(127, 91, 220, 0.002)',
@@ -42,19 +42,20 @@ module.exports = {
         robinEggBlue: '#00e9c0',
         scarlet: '#f72f45',
         silver: '#c0c0c0',
-        whisper: '#f9f4f9',
+        whisper: '#f9f4f9'
       },
       gridTemplateColumns: {
-        'invoiceLineItem': '1fr 100px 100px 100px 65px',
-        'invoiceTable': '100px 100px 60px 1fr 116px 32px 32px',
-        'invoiceTableMobile': "1fr 90px"
+        invoiceLineItem: '1fr 100px 100px 100px 65px',
+        invoiceTable: '100px 100px 60px 1fr 116px 32px 32px',
+        invoiceTableMobile: '1fr 90px'
       },
       zIndex: {
         modal: 999,
-        slidePanel: 998,
-        overlay: 997,
+        modalOverlay: 998 /* нужно добавить доп. z-index для подложки и чуть-чуть изменить уровни ниже */,
+        slidePanel: 997,
+        overlay: 996,
         navBarToggle: 91,
-        navBar: 90,
+        navBar: 90
       }
     }
   },

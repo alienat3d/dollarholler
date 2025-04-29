@@ -1,29 +1,33 @@
 <script lang="ts">
+  import { convertDate, isLate } from '$lib/utils/dateHelpers';
+  import { sumLineItems, centsToDollars } from '$lib/utils/moneyHelpers';
   import AdditionalOptions from '$lib/components/AdditionalOptions.svelte';
   import ThreeDots from '$lib/components/Icon/ThreeDots.svelte';
   import View from '$lib/components/Icon/View.svelte';
   import Tag from '$lib/components/Tag.svelte';
-  import { convertDate, isLate } from '$lib/utils/dateHelpers';
-  import { sumLineItems, centsToDollars } from '$lib/utils/moneyHelpers';
   import Send from '$lib/components/Icon/Send.svelte';
   import Trash from '$lib/components/Icon/Trash.svelte';
   import Edit from '$lib/components/Icon/Edit.svelte';
-  import Modal from '$lib/components/Modal.svelte';
-  import Button from '$lib/components/Button.svelte';
-  import { deleteInvoice } from '$lib/stores/InvoiceStore';
+  import SlidePanel from '$lib/components/SlidePanel.svelte';
+  import InvoiceForm from './InvoiceForm.svelte';
+  import ConfirmDelete from './ConfirmDelete.svelte';
 
   export let invoice: Invoice;
   let isAdditionalMenuShowing = false;
   let isOptionsDisabled = false;
   let isModalShowing = false;
+  let isInvoiceFormShowing = false;
 
   const handleDelete = () => {
     isModalShowing = true;
     isAdditionalMenuShowing = false;
     console.log('deleting');
   };
+  // 35.1 Добавим по клику на кнопку "Edit", чтобы панель формы показывалась. А также нужно скрывать меню, как только мы нажмём на неё. ↓
   const handleEdit = () => {
     console.log('editing');
+    isInvoiceFormShowing = true;
+    isAdditionalMenuShowing = false;
   };
   const handleSendInvoice = () => {
     console.log('sending');
@@ -79,34 +83,27 @@
   </div>
 </div>
 
-<Modal isVisible={isModalShowing} on:close={() => (isModalShowing = false)}>
-  <div class="flex h-full min-h-[175px] flex-col items-center justify-between gap-6">
-    <div class="text-center text-xl font-bold text-daisyBush">
-      Are you sure you want to delete this invoice to
-      <span class="text-scarlet">{invoice.client.name}</span> for
-      <span class="text-scarlet">${centsToDollars(sumLineItems(invoice.lineItems))}</span>?
-    </div>
-    <div class="flex gap-4">
-      <Button
-        isAnimated={false}
-        label="Cancel"
-        onClick={() => {
-          isModalShowing = false;
-        }}
-        style="secondary"
-      />
-      <Button
-        isAnimated={false}
-        label="Yes, Delete It"
-        onClick={() => {
-          deleteInvoice(invoice);
-          isModalShowing = false;
-        }}
-        style="destructive"
-      />
-    </div>
-  </div>
-</Modal>
+<!-- 35.9.1 И теперь на место, где было модальное окно мы вставим комп. модального окна ConfirmDelete. Добавим в него invoice, а также isModalShowing. -->
+<!-- Go to [src\routes\(dashboard)\invoices\ConfirmDelete.svelte] -->
+<!-- 35.11 А здесь мы слушаем событие, которые создали диспатчером, т.е. "close" и здесь мы уже будем менять значение "isModalShowing". -->
+<!-- Go to [src\routes\(dashboard)\invoices\InvoiceForm.svelte] -->
+<ConfirmDelete {invoice} {isModalShowing} on:close={() => (isModalShowing = false)} />
+
+<!-- * 35.0 Итак, теперь оживим кнопку "Edit", точнее, чтобы по клику на неё была возможность редактировать каждый уже созданный ранее инвойс. И для начала скопируем часть "slide panel" из [src\routes\(dashboard)\invoices\+page.svelte] сюда и поправим ошибки. ↑ -->
+<!-- 35.2 Также в InvoiceForm комп. нам нужно передавать данные из того инвойса, по которому мы кликнули кнопку "Edit", чтобы заполнить ими форму для редактирования. И у нас уже создан проп invoice, т.ч. можно его просто туда передать. -->
+<!-- Go to [src\routes\(dashboard)\invoices\InvoiceForm.svelte] -->
+<!-- 35.4.1 Также добавим теперь formState, что он должен быть в значении "edit". -->
+<!-- Go to [src\routes\(dashboard)\invoices\InvoiceForm.svelte] -->
+<!-- slide panel -->
+{#if isInvoiceFormShowing}
+  <SlidePanel
+    on:closePanel={() => {
+      isInvoiceFormShowing = false;
+    }}
+  >
+    <InvoiceForm {invoice} formState="edit" closePanel={() => (isInvoiceFormShowing = false)} />
+  </SlidePanel>
+{/if}
 
 <style lang="postcss">
   .invoice-row {
