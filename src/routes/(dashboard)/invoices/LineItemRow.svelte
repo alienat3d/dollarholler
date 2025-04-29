@@ -18,8 +18,9 @@
   let dispatch = createEventDispatcher();
 </script>
 
-<div class="invoice-line-item border-b-2 border-fog py-2">
-  <div>
+<div class="invoice-line-item border-b-2 border-fog py-4 sm:py-2">
+  <div class="description">
+    <label class="line-item-label" for="description">Description</label>
     <input
       class="line-item"
       type="text"
@@ -29,7 +30,8 @@
     />
   </div>
 
-  <div>
+  <div class="unitPrice">
+    <label class="line-item-label mr-4 text-right" for="unitPrice">Unit Price</label>
     <input
       class="line-item text-right"
       type="number"
@@ -45,7 +47,8 @@
     />
   </div>
 
-  <div>
+  <div class="qty">
+    <label class="line-item-label mr-2 text-center" for="quantity">Qty.</label>
     <input
       class="line-item text-center"
       type="number"
@@ -59,7 +62,8 @@
     />
   </div>
 
-  <div>
+  <div class="amount">
+    <label class="line-item-label mr-4 text-right" for="amount">Amount</label>
     <input
       class="line-item text-right"
       type="number"
@@ -71,7 +75,7 @@
     />
   </div>
 
-  <div>
+  <div class="trash">
     {#if canDelete}
       <button
         on:click|preventDefault={() => {
@@ -105,5 +109,9 @@
   input[type='number']:disabled,
   input[type='text']:disabled {
     @apply border-b-0 bg-transparent px-0;
+  }
+
+  .line-item-label {
+    @apply block sm:hidden;
   }
 </style>

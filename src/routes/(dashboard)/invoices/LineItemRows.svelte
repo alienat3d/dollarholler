@@ -25,9 +25,9 @@
 
 <div class="invoice-line-item border-b-2 border-daisyBush pb-2">
   <div class="table-header">Description</div>
-  <div class="table-header text-right">Unit Price</div>
-  <div class="table-header text-center">Qty</div>
-  <div class="table-header text-right">Amount</div>
+  <div class="table-header mr-3.5 text-right">Unit Price</div>
+  <div class="table-header mr-3.5 text-center">Qty</div>
+  <div class="table-header mr-3.5 text-right">Amount</div>
 </div>
 
 {#if lineItems}
@@ -43,7 +43,7 @@
 {/if}
 
 <div class="invoice-line-item">
-  <div class="col-span-2">
+  <div class="col-span-1 sm:col-span-2">
     <Button
       isAnimated={false}
       label="+ Line Item"
@@ -58,7 +58,7 @@
 </div>
 
 <div class="invoice-line-item">
-  <div class="col-span-2 py-5 text-right font-bold text-monsoon">Discount</div>
+  <div class="col-span-1 py-5 text-right font-bold text-monsoon sm:col-span-2">Discount</div>
   <div class="relative">
     <input
       class="line-item h-10 w-full border-b-2 border-dashed border-stone-300 pr-4 text-right focus:border-solid focus:border-lavenderIndigo focus:outline-none"
@@ -75,13 +75,13 @@
 </div>
 
 <div class="invoice-line-item">
-  <div class="col-span-6">
+  <div class="col-span-3 sm:col-span-6">
     <CircledAmount label="Total:" amount={`$${total}`} />
   </div>
 </div>
 
 <style lang="postcss">
   .table-header {
-    @apply text-sm font-bold text-daisyBush;
+    @apply hidden text-sm font-bold text-daisyBush sm:block;
   }
 </style>
