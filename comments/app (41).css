@@ -39,6 +39,8 @@
     @apply border-2 border-lavenderIndigo outline-none;
   }
 
+  /* 41.5 Осталась ещё маленькая деталь в Firefox, даже, если инпуты заблокированы, то в этом браузере остаются показываться стрелочки изменения значения числовых инпутов, а нам это не нужно в отчёте, поэтому мы это убираем. */
+  /* Go to [src\routes\(dashboard)\invoices\[id]\+page.svelte] */
   input[type='number']:disabled {
     @apply appearance-none;
     -moz-appearance: textfield;

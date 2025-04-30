@@ -8,6 +8,8 @@ export const sumLineItems = (lineItems: LineItem[] | undefined): number => {
   return lineItems.reduce((prevValue, curValue) => prevValue + curValue.amount, 0);
 };
 
+// 41.8 Также, чтобы не было подобных багов с NaN нам нужна функция, которая будем конвертировать unitPrice & amount из значения в центах в доллары без добавления ",".
+// Go to [src\routes\(dashboard)\invoices\LineItemRow.svelte]
 /**
  * Converting cents to dollars, without commas
  * @param {number} cents

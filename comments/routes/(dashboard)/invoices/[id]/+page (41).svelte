@@ -4,6 +4,7 @@
   import { convertDate } from '$lib/utils/dateHelpers';
   import LineItemRows from '../LineItemRows.svelte';
 
+  // * 41.0 Пришло время сделать страницу динамической. Данные для инвойса уже проходят на сквозь через проп "data", который мы добавим. "data" это объект в котором другой объект "invoice" с типом Invoice.
   export let data: { invoice: Invoice };
   console.log(data);
 
@@ -51,6 +52,7 @@
     />
   </div>
 
+  <!-- 41.1 Это мы пока не трогаем, т.к. это должно заполняться из настроек, т.к. это наша информация. -->
   <div class="col-span-2 col-start-5 pt-4">
     <div class="label">From</div>
     <p>
@@ -60,6 +62,7 @@
     </p>
   </div>
 
+  <!-- 41.2 Начинаем заполнять динамические данные, точнее их пути, где они расположены. -->
   <div class="col-span-3">
     <div class="label">Bill To:</div>
     <p>
@@ -91,6 +94,10 @@
     <p>{data.invoice.subject}</p>
   </div>
 
+  <!-- 41.3.0 Там где у нас перечень инвойсов подставляем наш комп. с инвойсами и вставляем в него сами инвойсы. Но пока, как и в обычной форме создания\редактирования инвойсов, мы можем редактировать и здесь содержимое, а нам нужно сделать его на этой странице только доступным для просмотра. Для этого добавим дополнительный проп isEditable в положение false. -->
+  <!-- Go to [src\routes\(dashboard)\invoices\LineItemRows.svelte] -->
+  <!-- 41.6 Ещё можно заметить, что в индивидуальный отчётах дисконт не работает как должен, чтобы его починить мы добавим сюда discount, но в значении также добавим "?", т.к. не в каждом инвойсе он может быть, а если его нет, то он должен быть нулём. -->
+  <!-- Go to [src\routes\(dashboard)\invoices\LineItemRows.svelte] -->
   <div class="col-span-6">
     <LineItemRows
       lineItems={data.invoice.lineItems}

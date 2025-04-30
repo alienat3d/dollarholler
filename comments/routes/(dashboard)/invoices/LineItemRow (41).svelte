@@ -1,17 +1,20 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
+  import Trash from '$lib/components/Icon/Trash.svelte';
   import {
     twoDecimals,
     dollarsToCents,
     centsToDollarsWithoutCommas
   } from '$lib/utils/moneyHelpers';
-  import Trash from '$lib/components/Icon/Trash.svelte';
 
   export let lineItem: LineItem;
   export let canDelete: boolean = false;
   export let isRequired: boolean = false;
+  // 41.4.0 И нам нужно заблокировать также остальные инпуты, для этого создадим также и здесь проп isEditable. ↓
   export let isEditable: boolean = true;
 
+  // 41.9 А теперь заменим функцию "centsToDollars" на новую, где в значении уже не будет вызывающей баг ",".
+  // Go to [src\routes\(dashboard)\invoices\LineItemRows.svelte]
   let unitPrice: string = centsToDollarsWithoutCommas(lineItem.amount / lineItem.quantity);
   let amount: string = centsToDollarsWithoutCommas(lineItem.amount);
 
@@ -23,6 +26,7 @@
   let dispatch = createEventDispatcher();
 </script>
 
+<!-- 41.4.1 И дальше, также, как и с дисконтом будем делать по той же схеме в каждом из инпутов ниже. -->
 <div class="invoice-line-item border-b-2 border-fog py-4 sm:py-2">
   <div class="description">
     <label class="line-item-label" for="description">Description</label>

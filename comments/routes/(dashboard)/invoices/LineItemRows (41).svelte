@@ -15,6 +15,7 @@
   let discountedAmount: string = '0.00';
   let total: string = '0.00';
 
+  // 41.3.1 Создадим сам проп с булевым значением. ↓
   export let isEditable: boolean = true;
 
   export let lineItems: LineItem[] | undefined = undefined;
@@ -27,6 +28,9 @@
     discountedAmount = centsToDollars(sumLineItems(lineItems) * (discount / 100));
   }
 
+  // 41.7 Ещё был замечен баг с большими суммами, где есть ",", которая меняет тип данных на строчный и ломает логику, в итоге показывая вместо числа "NaN". Потому модифицируем расчёт немного. Вместо реактивной строчки кода сделаем реактивный блок кода, поместив его в {}. Затем добавим переменную plainSubtotal, в которую поместим функцию replace, которая будет убирать запятые из subtotal, чтобы они не меняли тип данных и не мешали расчётам.
+  // Go to [src\lib\utils\moneyHelpers.ts]
+  // 41.10.1 Поэтому мы добавим в total ещё и метод "addThousandsSeparator".
   $: {
     const plainSubtotal = subtotal.replace(',', '');
     total = addThousandsSeparator(twoDecimals(Number(plainSubtotal) - Number(discountedAmount)));
@@ -40,6 +44,7 @@
   <div class="table-header mr-3.5 text-right">Amount</div>
 </div>
 
+<!-- 41.3.2 А также передадим его сюда. -->
 {#if lineItems}
   {#each lineItems as lineItem, index}
     <LineItemRow
@@ -53,6 +58,7 @@
   {/each}
 {/if}
 
+<!-- 41.3.3 Нам также стоит показывать кнопку добавления новых инвойсов лишь в случае, если isEditable в положении true. ↓ -->
 <div class="invoice-line-item">
   <div class="col-span-1 sm:col-span-2">
     {#if isEditable}
@@ -68,6 +74,8 @@
   <div class="py-5 text-right font-mono">${subtotal}</div>
 </div>
 
+<!-- 41.3.4 Также заблокируем инпут, если у нас isEditable - false. -->
+<!-- Go to [src\routes\(dashboard)\invoices\LineItemRow.svelte] -->
 <div class="invoice-line-item">
   <div class="col-span-1 py-5 text-right font-bold text-monsoon sm:col-span-2">Discount</div>
   <div class="relative">
@@ -87,6 +95,7 @@
   <div class="py-5 text-right font-mono">${discountedAmount}</div>
 </div>
 
+<!-- 41.10.0 Однако в итоговой сумме нам бы всё же хотелось видеть запятую, т.к. она улучшает читабельность. ↑ -->
 <div class="invoice-line-item">
   <div class="col-span-3 sm:col-span-6">
     <CircledAmount label="Total:" amount={`$${total}`} />
