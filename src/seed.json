@@ -182,5 +182,13 @@
 			],
 			"subject": "Website"
 		}
-	]
+	],
+	"settings": {
+		"name": "Al Zaplin",
+		"email": "zaplin.dev@gmail.com",
+		"street": "123 Some Street",
+		"city": "New York",
+		"state": "NY",
+		"zip": "54321"
+	}
 }

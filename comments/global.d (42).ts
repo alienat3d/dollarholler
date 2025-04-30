@@ -31,6 +31,8 @@ interface Client {
   zip?: string;
 }
 
+// * 42.0 Создадим хранилище настроек, чтобы заполнять из него нашу личную информацию (для генерации индивидуальных инвойсов, например). Затем мы перенесём эти настройки в отдельный блок "settings" в [src\seed.json].
+// Go to [src\lib\stores\SettingsStore.ts]
 interface Settings {
   name: string;
   email: string;
