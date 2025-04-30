@@ -1,12 +1,12 @@
 <!-- ? Шаблон для динамически генерируемых страниц индивидуального инвойса -->
 <script lang="ts">
-  import SvelteMarkdown from 'svelte-markdown';
-
   import { onMount } from 'svelte';
   import { settings, loadSettings } from '$lib/stores/SettingsStore';
   import { convertDate } from '$lib/utils/dateHelpers';
   import Button from '$lib/components/Button.svelte';
   import LineItemRows from '../LineItemRows.svelte';
+  // * 43.0 Итак, нам ещё нужно добавить распознавание спец. разметки для полей Notes & Terms, чтобы пользователи могли делать шрифт жирным или курсивным. Тут нам поможет либа "Svelte-Markdown" (https://www.npmjs.com/package/svelte-markdown), установим её и импортируем, как написано в документации. ↓
+  import SvelteMarkdown from 'svelte-markdown';
 
   export let data: { invoice: Invoice };
   console.log(data);
@@ -118,10 +118,12 @@
     />
   </div>
 
+  <!-- 43.1 Теперь мы применим эту либу для блоков "Notes" & "Terms", поместив внутрь этого компонента данные из хранилища. -->
   {#if data.invoice.notes}
     <div class="col-span-6">
       <div class="label">Notes</div>
       <SvelteMarkdown source={data.invoice.notes} />
+      <!-- <p>{data.invoice.notes}</p> -->
     </div>
   {/if}
 
@@ -129,6 +131,7 @@
     <div class="col-span-6">
       <div class="label">Terms and Conditions</div>
       <SvelteMarkdown source={data.invoice.terms} />
+      <!-- <p>{data.invoice.terms}</p> -->
     </div>
   {/if}
 </div>
