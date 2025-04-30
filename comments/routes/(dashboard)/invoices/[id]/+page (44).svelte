@@ -10,6 +10,7 @@
 
   export let data: { invoice: Invoice };
 
+  // * 43.0 Создадим функционал дающий команду браузеру распечатать страницу по нажатию на кнопку Print.
   const printInvoice = () => window.print();
 
   const copyLink = () => {
@@ -29,6 +30,7 @@
   });
 </script>
 
+<!-- 43.1.0 А ещё при помощи спец. префикса TailwindCSS "print:" мы можем убрать из версии для печати некоторые блоки... -->
 <div class="fixed z-0 mb-16 flex w-full max-w-screen-lg justify-between print:hidden">
   <h1 class="text-3xl font-bold text-daisyBush">Invoice</h1>
   <div class="flex items-center gap-4">
@@ -45,6 +47,7 @@
   </div>
 </div>
 
+<!-- 43.1.1 ... или убрать некоторые стили, которые при печати будут только мешать. -->
 <div
   class="relative top-32 z-10 grid grid-cols-6 gap-x-5 gap-y-8 bg-white py-16 px-32 shadow-slidePanel print:top-0 print:shadow-none"
 >
