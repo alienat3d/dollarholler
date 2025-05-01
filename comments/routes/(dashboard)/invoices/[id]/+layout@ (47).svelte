@@ -17,6 +17,7 @@
   }}
 />
 
+<!-- 47.1 В TailwindCSS удобно использовать префиксы "print:", чтобы стилизовать страницу для распечатывания. -->
 <div
   class="h-full min-h-screen bg-whisper pt-16 pb-32 print:bg-transparent print:pt-0 print:pb-0 lg:pt-12"
 >

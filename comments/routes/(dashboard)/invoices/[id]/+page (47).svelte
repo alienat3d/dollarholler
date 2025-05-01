@@ -34,6 +34,8 @@
   });
 </script>
 
+<!-- ? 47.0 If we go to the Dev Tools of the Chrome and then click on "3 dots" button, then "More tools", then "Rendering" and select "print" at Emulate CSS media type selector we can see how the page look like if we print it. -->
+<!-- Go to [src\routes\(dashboard)\invoices\[id]\+layout@.svelte] -->
 <div
   class="fixed z-0 mb-16 flex w-full max-w-screen-lg flex-col justify-between gap-y-5 px-4 print:hidden md:flex-row lg:px-0"
 >

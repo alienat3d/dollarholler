@@ -83,8 +83,6 @@
     />
   </div>
 
-  <!-- 41.4.2 А кнопку также логично показывать, только если isEditable - true. -->
-  <!-- Go to [src\app.css] -->
   <div class="trash">
     {#if canDelete && isEditable}
       <button
@@ -122,6 +120,6 @@
   }
 
   .line-item-label {
-    @apply block sm:hidden;
+    @apply block print:hidden sm:hidden;
   }
 </style>
