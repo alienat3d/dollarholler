@@ -11,18 +11,25 @@
 
   export let client: Client;
 
+  //  52.1 С помощью "console.log" посмотрим, что за данные мы получаем в объекте "client" и увидим, что действительно у каждого клиента есть массив "invoices", который мы можем использовать для заполнения граф "received" & "balance".
+  // console.log({ client });
+
   let isAdditionalMenuShowing = false;
 
+  // 52.2.0 Нам понадобятся две функции для получения значений для "receivedInvoices" и "balance".
   const receivedInvoices = () => {
+    // 52.2.1 Находим оплаченные инвойсы. Отфильтруем всех инвойсы, которые нам подходят сюда, т.е. со статусом "paid". Также может быть, что client.invoices недоступны по какой-то причине и TS предупреждает нас ошибкой, что нужно сделать доп. проверку и если инвойсов нет, то просто вернём 0.
     if (client?.invoices) {
       const paidInvoices = client.invoices.filter((invoice) => invoice.invoiceStatus === 'paid');
 
+      // 52.2.2 Получаем их сумму. Возьмём функцию-помощник "sumInvoices", чтобы сложить инвойсы между собой и поместим туда найденные выше оплаченные инвойсы. ↓
       return sumInvoices(paidInvoices);
     }
 
     return 0;
   };
 
+  // 52.3.0 Вообще сюда мы можем скопировать почти всё из функции "receivedInvoices" за исключением того, что теперь у нас фильтр будет не равен "paid". ↓
   const balanceInvoices = () => {
     if (client?.invoices) {
       const paidInvoices = client.invoices.filter((invoice) => invoice.invoiceStatus !== 'paid');
@@ -39,9 +46,11 @@
   <div class="client-name truncate whitespace-nowrap text-base font-bold lg:text-xl">
     {client.name}
   </div>
+  <!-- 52.2.3 Ну и вставим результат нашей новой функции сюда, однако нам нужен результат в долларах, т.ч. обернём дополнительно в функцию-помощник "centsToDollars" -->
   <div class="received text-right font-mono text-sm font-bold lg:text-lg">
     ${centsToDollars(receivedInvoices())}
   </div>
+  <!-- 52.3.1 И также вставим выполнение этой функции сюда -->
   <div class="balance text-right font-mono text-sm font-bold text-scarlet lg:text-lg">
     ${centsToDollars(balanceInvoices())}
   </div>

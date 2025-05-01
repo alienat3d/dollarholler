@@ -20,6 +20,8 @@ interface LineItem {
   quantity: number;
 }
 
+// * 52.0 В этом уроке мы будем делать графы "Received" & "Balance" динамически заполняемыми и начнём с того, что обновим файлы [src\seed.json], а также внесём и сюда кое-какие изменения, а точнее добавим в тип Client тип массива Invoice, который будет опциональным.
+// Go to [src\routes\(dashboard)\clients\ClientRow.svelte]
 interface Client {
   clientStatus?: ClientStatus;
   city?: string;
