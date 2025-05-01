@@ -19,8 +19,9 @@
 
 <div class="h-full min-h-screen w-screen bg-whisper pt-12 pb-32">
   <main class="mx-auto min-h-screen max-w-screen-lg">
-    <a class="fixed top-7 left-7 text-pastelPurple" href={previousPage ? previousPage : '/invoices'}
-      ><Arrow /></a
+    <a
+      class="fixed top-7 left-7 text-pastelPurple print:hidden"
+      href={previousPage ? previousPage : '/invoices'}><Arrow /></a
     >
     <slot><!-- optional fallback --></slot>
   </main>

@@ -11,10 +11,13 @@
 
   export let data: { invoice: Invoice };
 
+  // 45.1 Также создадим специальную переменную, которая будет содержать название кнопки по умолчанию "Copy Link" и передадим её внизу кнопке.
   let copyLinkLabel = 'Copy Link';
 
   const printInvoice = () => window.print();
 
+  // * 45.0 Теперь сделаем функционал кнопки "Copy Link", чтобы можно было скопировать ссылку на текущую страницу. Сделать это можно с помощью браузерного API. И внутрь метода "writeText" нам нужно поместить ссылку, которую мы хотим отправить в пользовательский буфер обмена. А доступ к текущему URL можно получить, через встроенное в Svelte хранилище $Page.
+  // 45.2 Ну и для наглядности мы будем менять на 5 сек. текст кнопки на "Copied!", чтобы дать пользователю понять, что ссылка успешно скопирована.
   const copyLink = () => {
     navigator.clipboard.writeText($page.url.href);
     copyLinkLabel = 'Copied!';
@@ -36,6 +39,8 @@
 
 <div class="fixed z-0 mb-16 flex w-full max-w-screen-lg justify-between print:hidden">
   <h1 class="text-3xl font-bold text-daisyBush">Invoice</h1>
+  <!-- 45.3.0 Чтобы кнопка не "прыгала" при переключении текста нам нужно ещё добавить пару стилей и для этого добавить ещё один проп "className". -->
+  <!-- Go to [src\lib\components\Button.svelte] -->
   <div class="flex items-center gap-4">
     <Button
       height="short"

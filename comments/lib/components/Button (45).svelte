@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { SvelteComponent } from 'svelte';
+  // 45.3.1 Добавляем этот проп здесь.
   export let className: string = '';
   export let label: string;
   export let onClick: () => void;
@@ -11,11 +12,13 @@
     | 'textOnly'
     | 'textOnlyDestructive' = 'primary';
   export let height: 'short' | 'regular' = 'regular';
+  export let width: 'minWidth' | 'regular' = 'regular';
   export let isAnimated = true;
   export let iconLeft: (new (...args: any[]) => SvelteComponent) | null = null;
   export let iconRight: (new (...args: any[]) => SvelteComponent) | null = null;
 </script>
 
+<!-- 45.3.2 А также сюда динамическим классом. -->
 <button
   on:click|preventDefault={() => onClick()}
   class={`button ${className}`}
@@ -26,6 +29,7 @@
   class:textOnly={style === 'textOnly'}
   class:textOnlyDestructive={style === 'textOnlyDestructive'}
   class:short={height === 'short'}
+  class:minWidth={width === 'minWidth'}
   class:isAnimated
 >
   {#if iconLeft}
@@ -72,5 +76,9 @@
 
   .short {
     @apply !py-1;
+  }
+
+  .minWidth {
+    @apply min-w-[169px] justify-center;
   }
 </style>
