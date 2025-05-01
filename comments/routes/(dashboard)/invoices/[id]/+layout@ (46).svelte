@@ -17,6 +17,7 @@
   }}
 />
 
+<!-- Удалим w-full из классов, т.к. он создавал гор. скролл. -->
 <div class="h-full min-h-screen bg-whisper pt-16 pb-32 lg:pt-12">
   <main class="mx-auto min-h-screen max-w-screen-lg">
     <a

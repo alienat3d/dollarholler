@@ -34,9 +34,11 @@
   });
 </script>
 
-<div class="fixed z-0 mb-16 flex w-full max-w-screen-lg justify-between print:hidden">
+<div
+  class="fixed z-0 mb-16 flex w-full max-w-screen-lg flex-col justify-between gap-y-5 px-4 print:hidden md:flex-row lg:px-0"
+>
   <h1 class="text-3xl font-bold text-daisyBush">Invoice</h1>
-  <div class="flex items-center gap-4">
+  <div class="flex flex-wrap items-center gap-2 sm:flex-nowrap sm:gap-4">
     <Button
       height="short"
       label="Print"
@@ -47,7 +49,7 @@
     <Button
       height="short"
       label={copyLinkLabel}
-      className="min-w-[169px] justify-center"
+      className="sm:min-w-[169px] min-w-[111px] justify-center"
       onClick={copyLink}
     />
     <Button height="short" label="Send" onClick={sendInvoice} />
@@ -56,9 +58,9 @@
 </div>
 
 <div
-  class="relative top-32 z-10 grid grid-cols-6 gap-x-5 gap-y-8 bg-white py-16 px-32 shadow-slidePanel print:top-0 print:shadow-none"
+  class="relative top-32 z-10 grid grid-cols-6 gap-x-5 gap-y-8 bg-white py-8 px-5 shadow-slidePanel print:top-0 print:shadow-none md:py-16 md:px-32"
 >
-  <div class="col-span-3">
+  <div class="col-span-6 sm:col-span-3">
     <img
       src="/images/logo.png"
       srcset="/images/logo@2x.png 2x, /images/logo.png 1x"
@@ -66,7 +68,7 @@
     />
   </div>
 
-  <div class="col-span-2 col-start-5 pt-4">
+  <div class="col-span-6 pt-4 sm:col-span-2 sm:col-start-5">
     {#if $settings && $settings.name}
       <div class="label">From</div>
       <p>
@@ -86,7 +88,7 @@
     {/if}
   </div>
 
-  <div class="col-span-3">
+  <div class="col-span-6 sm:col-span-3">
     <div class="label">Bill To:</div>
     <p>
       <strong>{data.invoice.client.name}</strong><br />
@@ -97,7 +99,7 @@
     </p>
   </div>
 
-  <div class="col-span-2 col-start-5">
+  <div class="col-span-6 sm:col-span-2 sm:col-start-5">
     <div class="label">Invoice ID</div>
     <p>{data.invoice.invoiceNumber}</p>
   </div>
@@ -107,7 +109,7 @@
     <p>{convertDate(data.invoice.dueDate)}</p>
   </div>
 
-  <div class="col-span-2 col-start-5">
+  <div class="col-span-3 sm:col-span-2 sm:col-start-5">
     <div class="label">Issue Date</div>
     <p>{convertDate(data.invoice.issueDate)}</p>
   </div>
