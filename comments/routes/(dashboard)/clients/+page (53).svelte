@@ -16,6 +16,7 @@
   <title>Clients | The Dollar Holler</title>
 </svelte:head>
 
+<!-- 53.2 Также раскомментируем и исправим эту часть с поиском. -->
 <div
   class="md:gap-7-4 mb-7 flex flex-col-reverse items-start justify-between gap-y-6 md:flex-row md:items-center lg:mb-16"
 >
@@ -37,6 +38,7 @@
   </div>
 </div>
 
+<!-- 53.1 Теперь можно вместо слов "Blank State" вставить наш новый компонент. -->
 <!-- clients -->
 <div>
   {#if $clients === null}
