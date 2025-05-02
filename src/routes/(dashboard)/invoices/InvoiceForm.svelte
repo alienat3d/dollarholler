@@ -195,7 +195,7 @@
 
       <div class="field col-span-2">
         <label for="zip">Zip</label>
-        <input type="text" name="zip" id="zip" bind:value={newClient.zip} />
+        <input type="text" name="zip" id="zip" minlength="5" bind:value={newClient.zip} />
       </div>
     </div>
   {/if}
