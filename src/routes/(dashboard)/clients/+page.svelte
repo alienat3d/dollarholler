@@ -11,9 +11,7 @@
 
   let isClientFormShowing: boolean = false;
 
-  const closePanel = () => {
-    isClientFormShowing = false;
-  };
+  const closePanel = () => (isClientFormShowing = false);
 
   onMount(() => {
     loadClients();
@@ -36,12 +34,7 @@
 
   <!-- new invoice button -->
   <div>
-    <Button
-      label="+ Client"
-      onClick={() => {
-        isClientFormShowing = true;
-      }}
-    />
+    <Button label="+ Client" onClick={() => (isClientFormShowing = true)} />
   </div>
 </div>
 

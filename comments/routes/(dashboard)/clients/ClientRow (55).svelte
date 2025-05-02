@@ -15,6 +15,7 @@
 
   let isAdditionalMenuShowing: boolean = false;
 
+  // 55.4.1 А также переменную с состоянием панели.
   let isClientFormShowing: boolean = false;
 
   const receivedInvoices = () => {
@@ -37,8 +38,10 @@
     return 0;
   };
 
+  // 55.4.2 И собственно саму скрывающую панель функцию. ↓
   const closePanel = () => (isClientFormShowing = false);
 
+  // 55.5.1 Создадим эту функцию, которая будет открывать панель формы клиента и также переключать её в положение "edit".
   const handleEdit = () => {
     isClientFormShowing = true;
     isAdditionalMenuShowing = false;
@@ -60,6 +63,7 @@
     <a class="hover:daisyBush text-pastelPurple transition-colors" href="#"><View /></a>
   </div>
   <div class="three-dots relative hidden items-center justify-center lg:flex">
+    <!-- 55.5.0 В выпадающем меню сделаем, чтобы по клику на кнопку "edit" запускалась функция "handleEdit". ↑ -->
     <button
       class="hover:daisyBush text-pastelPurple transition-colors"
       on:click={() => (isAdditionalMenuShowing = !isAdditionalMenuShowing)}><ThreeDots /></button
@@ -93,6 +97,7 @@
   </div>
 </div>
 
+<!-- 55.4.0 Добавим сюда логику скрытия панели с формой. А также нам нужно передать в комп. ClientForm состояние формы "edit" и передать объект "client" для заполнения формы данными при редактировании клиента. -->
 {#if isClientFormShowing}
   <SlidePanel on:closePanel={closePanel}>
     <ClientForm {closePanel} formState="edit" {client} />

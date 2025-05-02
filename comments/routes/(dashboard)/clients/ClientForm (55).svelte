@@ -8,10 +8,13 @@
 
   export let client: Client = {} as Client;
 
+  // * 55.0 Создадим переменную, которая будет содержать статус формы "create" или "edit".
   export let formState: 'create' | 'edit' = 'create';
 
   export let closePanel: () => void = () => {};
 
+  // 55.2 Также и в этой функции мы создаём условие, что если статус у формы "create", то мы запусти "addClient", иначе "updateClient". Однако вторую функцию хранилища нам ещё нужно создать.
+  // Go to [src\lib\stores\ClientStore.ts]
   const handleSubmit = () => {
     if (formState === 'create') {
       addClient(client);
@@ -30,6 +33,7 @@
   };
 </script>
 
+<!-- 55.1 Теперь мы в заголовок будет подставляться "Add" либо "Edit", в зависимости от статуса формы. -->
 <h2 class="mb-7 font-sansSerif text-3xl font-bold text-daisyBush">
   {#if formState === 'create'}Add{:else}Edit{/if} a Client
 </h2>
