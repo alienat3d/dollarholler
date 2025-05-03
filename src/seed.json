@@ -316,11 +316,11 @@
 		}
 	],
 	"settings": {
-		"city": "Coolville",
-		"email": "amy@example.com",
-		"myName": "Amy Dutton",
-		"state": "TN",
-		"street": "123 Awesome Street",
-		"zip": "54321"
+		"city": "New York",
+		"email": "zaplin.dev@gmail.com",
+		"name": "Al Zaplin",
+		"state": "NY",
+		"street": "10 Manhattan Ave",
+		"zip": "10036"
 	}
 }
