@@ -56,10 +56,12 @@
   <div class="balance text-right font-mono text-sm font-bold text-scarlet lg:text-lg">
     ${centsToDollars(balanceInvoices())}
   </div>
+  <!-- 56.5 Теперь нужно залинковать этот компонент со страницей отчёта по клиенту. Для этого у нас подготовлена кнопка с глазом. -->
+  <!-- Go to [src\routes\(dashboard)\clients\[id]\+page.svelte] -->
   <div class="view relative hidden items-center justify-center lg:flex">
-    <a class="hover:daisyBush text-pastelPurple transition-colors" href={`/clients/${client.id}`}>
-      <View />
-    </a>
+    <a class="hover:daisyBush text-pastelPurple transition-colors" href={`/clients/${client.id}`}
+      ><View /></a
+    >
   </div>
   <div class="three-dots relative hidden items-center justify-center lg:flex">
     <button

@@ -4,7 +4,7 @@
   import Button from '$lib/components/Button.svelte';
   import Search from '$lib/components/Search.svelte';
   import ClientRowHeader from './ClientRowHeader.svelte';
-  import ClientRow from './ClientRow.svelte';
+  import ClientRow from './ClientRow (56).svelte';
   import BlankState from './BlankState.svelte';
 
   onMount(() => {

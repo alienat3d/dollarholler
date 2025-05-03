@@ -4,7 +4,7 @@
   import Button from '$lib/components/Button.svelte';
   import Search from '$lib/components/Search.svelte';
   import ClientRowHeader from './ClientRowHeader.svelte';
-  import ClientRow from './ClientRow.svelte';
+  import ClientRow from './ClientRow (56).svelte';
 
   // 50.4 Надо также сделать динамическое заполнение вёрстки данными из хранилища клиентов. Но сперва ещё добавим в файл сид [src\seed.json] дополнительное поле клиентам, а точнее их статус "активный/архивный". С помощью, уже созданной нами ранее, функции loadClients мы загрузим данные и заполним ими вёрстку, а точнее компоненты "ClientRow". ↓
   onMount(() => {
