@@ -2,7 +2,6 @@
   import { onMount } from 'svelte';
   import { loadInvoices } from '$lib/stores/InvoiceStore';
   import { centsToDollars, sumInvoices } from '$lib/utils/moneyHelpers';
-  import { isLate } from '$lib/utils/dateHelpers';
   import Edit from '$lib/components/Icon/Edit.svelte';
   import CircledAmount from '$lib/components/CircledAmount.svelte';
   import Search from '$lib/components/Search.svelte';
@@ -12,6 +11,7 @@
   import BlankState from '../../invoices/BlankState.svelte';
   import InvoiceRowHeader from '../../invoices/InvoiceRowHeader.svelte';
   import ClientForm from '../ClientForm.svelte';
+  import { isLate } from '$lib/utils/dateHelpers';
 
   let isClientFormShowing: boolean = false;
   let isEditingCurrentClient: boolean = false;
@@ -30,6 +30,8 @@
 
   const closePanel = () => (isClientFormShowing = false);
 
+  // 57.2 Сперва создадим функцию getDraft. Внутри неё будет переменная, которая содержит все инвойсы со статусом "draft" и мы будем их фильтровать методом "filter". И у нас уже есть метод в moneyHelpers, который суммирует все инвойсы, которые в него попадают "sumInvoices". А затем также переведём значение в доллары, при помощи доп. метода "centsToDollars".
+  // 57.2 Также, чтобы избавиться от TS-ошибок и сделать наш код надёжнее сделаем проверку на существование данных и что у нас больше одного инвойса, иначе будем возвращать 0. ↓
   const getDraft = (): string => {
     if (!data.client.invoices || data.client.invoices.length < 1) return '0.00';
 
@@ -40,6 +42,7 @@
     return centsToDollars(sumInvoices(draftInvoices));
   };
 
+  // 57.4.0 Похожей функцией на "getDraft" будет и "getPaid", но мы поменяем фильтр по статусу инвойсов с "draft" на "paid". ↓
   const getPaid = (): string => {
     if (!data.client.invoices || data.client.invoices.length < 1) return '0.00';
 
@@ -48,6 +51,7 @@
     return centsToDollars(sumInvoices(paidInvoices));
   };
 
+  // 57.5.0 Нам также понадобится функция "getTotalOverdue" для заполнения графы "Total Overdue", которая также похожа на обе функции сверху, но здесь мы фильтруем инвойсы по статусу "sent", а также нам нужна проверка, что этот инвойс также просрочен - "late". Для второй проверки у нас уже была функция в dateHelpers "isLate", которую удобно здесь использовать и в неё мы поместим данные из "invoice.dueDate".
   const getTotalOverdue = (): string => {
     if (!data.client.invoices || data.client.invoices.length < 1) return '0.00';
 
@@ -58,6 +62,7 @@
     return centsToDollars(sumInvoices(paidInvoices));
   };
 
+  // 57.6.0 Осталось написать функцию для графы "Total Outstanding" и она будет похожа на предыдущие 3 функции, но теперь мы ищем инвойсы, которые ещё не были оплачены и ещё не просрочены.
   const getTotalOutstanding = (): string => {
     if (!data.client.invoices || data.client.invoices.length < 1) return '0.00';
 
@@ -92,6 +97,11 @@
   <Button label="Edit" style="textOnly" isAnimated={false} iconLeft={Edit} onClick={editClient} />
 </div>
 
+<!-- * 57.0 В этом уроке займёмся написанием функции калькуляции общей статистики по выплатам для конкретного клиента из данных, полученных из инвойсов хранилища и подставим динамически их суммы сюда. -->
+<!-- 57.1 Начнём мы с графы "Total Draft", и здесь на самом деле довольно легко фильтровать, т.к. каждый инвойс имеет статус и по нему можно определить относится ли платёж к "draft". Тоже касается и графы "Total Paid". ↑ -->
+<!-- 57.3 Подставим запуск новой функции "getDraft" вместо хардкода. ↑ -->
+<!-- 57.4.1 Также подставляем эту функцию в значение. ↑ -->
+<!-- 57.5.1 И также выполнение этой функции ставится в значение для графы "Total Overdue". ↑ -->
 <div class="mb-10 grid grid-cols-1 gap-4 rounded-lg bg-gallery py-7 px-10 lg:grid-cols-4">
   <div class="summary-block">
     <div class="label">Total Overdue</div>
