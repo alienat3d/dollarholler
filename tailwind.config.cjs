@@ -9,12 +9,13 @@ module.exports = {
     },
     extend: {
       backgroundImage: {
+        404: "url('/images/bg-404.svg')",
         arrowLeftUp: "url('/images/arrow-left-up.svg')",
         arrowRightUp: "url('/images/arrow-right-up.svg')",
+        auth: "url('/images/bg-auth.svg')",
         chevronDown: "url('/images/chevron--down.svg')",
         circle: "url('/images/circle.svg')",
-        thankYou: "url('/images/bg-thankYou.svg')",
-        404: "url('/images/bg-404.svg')"
+        thankYou: "url('/images/bg-thankYou.svg')"
       },
       backgroundPosition: {
         'right-center': '97% center'
