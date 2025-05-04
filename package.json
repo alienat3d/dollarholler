@@ -34,6 +34,7 @@
   "type": "module",
   "dependencies": {
     "@types/uuid": "^8.3.4",
+    "caniuse-lite": "^1.0.30001716",
     "date-fns": "^2.29.3",
     "svelte-markdown": "^0.4.1",
     "uuid": "^9.0.0"
