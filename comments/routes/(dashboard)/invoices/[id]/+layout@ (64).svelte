@@ -21,6 +21,7 @@
 <div
   class="h-full min-h-screen bg-whisper pt-16 pb-32 print:bg-transparent print:pt-0 print:pb-0 lg:pt-12"
 >
+  <!-- * 64.0 Анимируем при помощи "fly" также появление\исчезновение страницы индивидуального отчёта по инвойсу. -->
   <main class="mx-auto min-h-screen max-w-screen-lg" transition:fly={{ y: 500, duration: 500 }}>
     <a
       class="fixed top-7 left-7 text-pastelPurple print:hidden"
