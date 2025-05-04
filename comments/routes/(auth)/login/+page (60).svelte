@@ -9,6 +9,7 @@
 
 <h1 class="mb-4 text-[2.5rem] font-black text-goldenFizz">Login</h1>
 
+<!-- 60.2 Мы также добавим этот новый комп. на страницу Login. -->
 <form>
   <Alert message={alertMessage} />
   <div class="field">
