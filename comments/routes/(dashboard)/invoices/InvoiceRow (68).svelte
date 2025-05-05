@@ -20,6 +20,7 @@
   let isOptionsDisabled = false;
   let isModalShowing = false;
   let isInvoiceFormShowing = false;
+  // * 68.0.0 Теперь займёмся кнопкой "Cancel" в моб. версиях приложения, по нажатию на которую нам нужно возвращать строку инвойса назад на своё место. Для этого создадим переменную triggerReset. ↓
   let triggerReset = false;
 
   const handleDelete = () => {
@@ -52,6 +53,10 @@
   };
 </script>
 
+<!-- 68.0.1 Теперь в экшен "swipe" поместим эту переменную. -->
+<!-- Go to [src\lib\actions\Swipe.ts] -->
+<!-- 68.5 Теперь нам нужно поставить слушатель кастомного события на тот же элемент, где у нас use:swipe, чтобы по его срабатыванию переключать значение resetTrigger в false. -->
+<!-- Go to [src\lib\actions\Swipe.ts] -->
 <div class="relative">
   <div
     class="invoice-table invoice-row relative z-row items-center rounded-lg bg-white py-3 shadow-tableRow lg:py-6"
@@ -93,6 +98,9 @@
     </div>
   </div>
 
+  <!-- 68.3 А здесь на событие клика по кнопке "Cancel" будем устанавливать triggerReset в положение true. Изменение параметра запустит "update" в [src\lib\actions\Swipe.ts] экшене и т.о. инвойс-элемент вернётся на своё место. -->
+  <!-- Go to [src\lib\actions\Swipe.ts] -->
+  <!-- swipe to reveal -->
   <div class="absolute inset-0 z-rowActions flex h-full w-full items-center justify-around">
     <button class="action-button center" on:click={() => (triggerReset = true)}
       ><Cancel width={32} height={32} />Cancel</button
