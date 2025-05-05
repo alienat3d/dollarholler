@@ -50,6 +50,8 @@
   };
 </script>
 
+<!-- 66.1 Здесь мы применяем наш новый action «Swipe». -->
+<!-- Go to [src\lib\actions\Swipe.ts] -->
 <div
   class="invoice-table invoice-row items-center rounded-lg bg-white py-3 shadow-tableRow lg:py-6"
   use:swipe={() => {}}
