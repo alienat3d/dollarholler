@@ -45,7 +45,7 @@ export const swipe = (node: HTMLElement, params: SwipeProps) => {
   };
 
   const moveCardOver = (endingX: number) => {
-    const leftSnapX = elementWidth * -0.95;
+    const leftSnapX = elementWidth * -0.96;
     const rightSnapX = 0;
     const movement = startingX - endingX;
 

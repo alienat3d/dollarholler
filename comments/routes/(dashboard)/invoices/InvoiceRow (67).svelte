@@ -8,9 +8,9 @@
   import ThreeDots from '$lib/components/Icon/ThreeDots.svelte';
   import View from '$lib/components/Icon/View.svelte';
   import Cancel from '$lib/components/Icon/Cancel.svelte';
-  import Trash from '$lib/components/Icon/Trash.svelte';
   import AdditionalOptions from '$lib/components/AdditionalOptions.svelte';
   import Tag from '$lib/components/Tag.svelte';
+  import Trash from '$lib/components/Icon/Trash.svelte';
   import SlidePanel from '$lib/components/SlidePanel.svelte';
   import InvoiceForm from './InvoiceForm.svelte';
   import ConfirmDelete from './ConfirmDelete.svelte';
@@ -51,6 +51,7 @@
   };
 </script>
 
+<!-- * 67.0.0 Обернём нашу строку с инвойсом в доп. div-обёртку, ... -->
 <div class="relative">
   <div
     class="invoice-table invoice-row relative z-row items-center rounded-lg bg-white py-3 shadow-tableRow lg:py-6"
@@ -91,6 +92,7 @@
     </div>
   </div>
 
+  <!-- 67.0.1 А затем добавим ещё один блок, который будет появляться после действия "свайп". Здесь мы поместим наше меню для дальнейших манипуляций с инвойсом. -->
   <!-- swipe to reveal -->
   <div class="absolute inset-0 z-rowActions flex h-full w-full items-center justify-around">
     <button class="action-button center"><Cancel width={32} height={32} />Cancel</button>
