@@ -1,6 +1,6 @@
 <script lang="ts">
   import { fade } from 'svelte/transition';
-  import { elasticInOut } from 'svelte/easing';
+  import { cubicOut } from 'svelte/easing';
 
   export let className: string = '';
 </script>
@@ -15,5 +15,5 @@
 
 <div
   class={`fixed inset-0 z-overlay bg-blueGem opacity-60 ${className}`}
-  transition:fade={{ duration: 500, easing: elasticInOut }}
+  transition:fade={{ duration: 300, easing: cubicOut }}
 />

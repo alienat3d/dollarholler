@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { clickOutside } from '$lib/actions/ClickOutside';
   import { centsToDollars, sumInvoices } from '$lib/utils/moneyHelpers';
   import View from '$lib/components/Icon/View.svelte';
   import ThreeDots from '$lib/components/Icon/ThreeDots.svelte';
@@ -61,7 +62,12 @@
       <View />
     </a>
   </div>
-  <div class="three-dots relative hidden items-center justify-center lg:flex">
+  <!-- 65.5 Пора применить нашу новую кастомную функцию в деле. Начнём с контекстного меню по клику на кнопке "три точки". Сначала определим верхнюю обёртку элемента, который нас интересует и это div-обёртка вокруг кнопки "три точки", ему-то мы и напишем use:clickOutside, который запустит нашу функцию каждый раз, когда пользователь кликнул снаружи этого элемента. И т.о. он будет переключать переменную "isAdditionalMenuShowing" в положение false, т.е. скрывать контекстное меню. -->
+  <!-- Go to [src\routes\(dashboard)\invoices\InvoiceRow.svelte] -->
+  <div
+    class="three-dots relative hidden items-center justify-center lg:flex"
+    use:clickOutside={() => (isAdditionalMenuShowing = false)}
+  >
     <button
       class="hover:daisyBush text-pastelPurple transition-colors"
       on:click={() => (isAdditionalMenuShowing = !isAdditionalMenuShowing)}><ThreeDots /></button

@@ -1,13 +1,14 @@
 <script lang="ts">
+  import { clickOutside } from '$lib/actions/ClickOutside';
   import { convertDate, isLate } from '$lib/utils/dateHelpers';
   import { centsToDollars, invoiceTotal } from '$lib/utils/moneyHelpers';
-  import AdditionalOptions from '$lib/components/AdditionalOptions.svelte';
+  import Send from '$lib/components/Icon/Send.svelte';
+  import Edit from '$lib/components/Icon/Edit.svelte';
   import ThreeDots from '$lib/components/Icon/ThreeDots.svelte';
   import View from '$lib/components/Icon/View.svelte';
+  import AdditionalOptions from '$lib/components/AdditionalOptions.svelte';
   import Tag from '$lib/components/Tag.svelte';
-  import Send from '$lib/components/Icon/Send.svelte';
   import Trash from '$lib/components/Icon/Trash.svelte';
-  import Edit from '$lib/components/Icon/Edit.svelte';
   import SlidePanel from '$lib/components/SlidePanel.svelte';
   import InvoiceForm from './InvoiceForm.svelte';
   import ConfirmDelete from './ConfirmDelete.svelte';
@@ -63,7 +64,12 @@
   <div class="viewButton hidden items-center justify-center text-sm lg:flex lg:text-lg">
     <a href={`/invoices/${invoice.id}`} class="text-pastelPurple hover:text-daisyBush"><View /></a>
   </div>
-  <div class="moreButton relative hidden items-center justify-center text-sm lg:flex lg:text-lg">
+  <!-- 65.6 То же сделаем и для этого комп. поместив родительскую обёртку кнопки "три точки" use:clickOutside. -->
+  <!-- Go to [src\lib\components\Modal.svelte] -->
+  <div
+    class="moreButton relative hidden items-center justify-center text-sm lg:flex lg:text-lg"
+    use:clickOutside={() => (isAdditionalMenuShowing = false)}
+  >
     <button
       class=" text-pastelPurple hover:text-daisyBush"
       on:click={() => {
