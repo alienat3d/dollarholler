@@ -19,6 +19,8 @@
   <Portal>
     <Overlay className="!z-modalOverlay" />
     <div class="center fixed inset-0 z-modal">
+      <!-- 65.7 Также и здесь добавим use и нашу кастомную функцию в div-обёртку и запускать будем dispatch('close') для закрытия модального окна. -->
+      <!-- Go to [src\lib\components\SlidePanel.svelte] -->
       <div
         class="relative min-h-[230px] w-full max-w-[450px] rounded-lg bg-white px-10 py-7"
         use:clickOutside={() => dispatch('close')}

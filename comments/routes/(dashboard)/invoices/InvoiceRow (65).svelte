@@ -64,6 +64,8 @@
   <div class="viewButton hidden items-center justify-center text-sm lg:flex lg:text-lg">
     <a href={`/invoices/${invoice.id}`} class="text-pastelPurple hover:text-daisyBush"><View /></a>
   </div>
+  <!-- 65.6 То же сделаем и для этого комп. поместив родительскую обёртку кнопки "три точки" use:clickOutside. -->
+  <!-- Go to [src\lib\components\Modal.svelte] -->
   <div
     class="moreButton relative hidden items-center justify-center text-sm lg:flex lg:text-lg"
     use:clickOutside={() => (isAdditionalMenuShowing = false)}

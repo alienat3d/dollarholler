@@ -62,6 +62,8 @@
       <View />
     </a>
   </div>
+  <!-- 65.5 Пора применить нашу новую кастомную функцию в деле. Начнём с контекстного меню по клику на кнопке "три точки". Сначала определим верхнюю обёртку элемента, который нас интересует и это div-обёртка вокруг кнопки "три точки", ему-то мы и напишем use:clickOutside, который запустит нашу функцию каждый раз, когда пользователь кликнул снаружи этого элемента. И т.о. он будет переключать переменную "isAdditionalMenuShowing" в положение false, т.е. скрывать контекстное меню. -->
+  <!-- Go to [src\routes\(dashboard)\invoices\InvoiceRow.svelte] -->
   <div
     class="three-dots relative hidden items-center justify-center lg:flex"
     use:clickOutside={() => (isAdditionalMenuShowing = false)}
