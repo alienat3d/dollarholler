@@ -16,6 +16,7 @@
   import ConfirmDelete from './ConfirmDelete.svelte';
 
   export let invoice: Invoice;
+
   let isAdditionalMenuShowing = false;
   let isOptionsDisabled = false;
   let isModalShowing = false;
@@ -93,7 +94,8 @@
     </div>
   </div>
 
-  <div class="absolute inset-0 z-rowActions flex h-full w-full items-center justify-around">
+  <!-- swipe to reveal -->
+  <div class="swipe-revealed-actions">
     <button class="action-button center" on:click={() => (triggerReset = true)}
       ><Cancel width={32} height={32} />Cancel</button
     >
@@ -128,10 +130,6 @@
 {/if}
 
 <style lang="postcss">
-  .action-button {
-    @apply cursor-pointer flex-col font-bold text-daisyBush;
-  }
-
   .invoice-row {
     grid-template-areas:
       'invoiceNumber invoiceNumber'

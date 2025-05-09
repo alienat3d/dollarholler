@@ -50,8 +50,28 @@
 }
 
 @layer components {
-  .invoice-table {
-    @apply mb-3 grid w-full grid-cols-invoiceTableMobile gap-x-4 px-4 lg:grid-cols-invoiceTable lg:px-6;
+  .action-button {
+    @apply cursor-pointer flex-col font-bold text-daisyBush;
+  }
+
+  .auth-button {
+    @apply mt-6 min-h-[3.5rem] w-full rounded-lg bg-robinEggBlue py-3 px-4 text-xl font-bold text-daisyBush transition-all duration-200 hover:-translate-y-1 hover:shadow-lg;
+  }
+
+  .auth-heading {
+    @apply mb-4 text-[2.5rem] font-black text-goldenFizz;
+  }
+
+  .button {
+    @apply relative flex items-center whitespace-nowrap rounded-lg px-5 py-2 font-sansSerif text-base font-black lg:px-10 lg:py-3 lg:text-xl;
+  }
+
+  .client-table {
+    @apply mb-3 grid w-full grid-cols-clientTableMobile gap-x-4 px-4 lg:grid-cols-clientTable lg:px-6;
+  }
+
+  .field {
+    @apply mb-6;
   }
 
   .invoice-line-item {
@@ -94,24 +114,12 @@
     grid-area: trash;
   }
 
-  .client-table {
-    @apply mb-3 grid w-full grid-cols-clientTableMobile gap-x-4 px-4 lg:grid-cols-clientTable lg:px-6;
+  .invoice-table {
+    @apply mb-3 grid w-full grid-cols-invoiceTableMobile gap-x-4 px-4 lg:grid-cols-invoiceTable lg:px-6;
   }
 
-  .field {
-    @apply mb-6;
-  }
-
-  .button {
-    @apply relative flex items-center whitespace-nowrap rounded-lg px-5 py-2 font-sansSerif text-base font-black lg:px-10 lg:py-3 lg:text-xl;
-  }
-
-  .auth-heading {
-    @apply mb-4 text-[2.5rem] font-black text-goldenFizz;
-  }
-
-  .auth-button {
-    @apply mt-6 min-h-[3.5rem] w-full rounded-lg bg-robinEggBlue py-3 px-4 text-xl font-bold text-daisyBush transition-all duration-200 hover:-translate-y-1 hover:shadow-lg;
+  .swipe-revealed-actions {
+    @apply absolute inset-0 z-rowActions flex h-full w-full items-center justify-around;
   }
 }
 

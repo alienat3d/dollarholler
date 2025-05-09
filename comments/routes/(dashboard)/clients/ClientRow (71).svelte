@@ -47,6 +47,7 @@
     isAdditionalMenuShowing = false;
   };
 
+  // 71.2 Также понадобится создать ещё пару функций для архивации, активации и удаления клиентов.
   const handleArchiveClient = () => {
     client.clientStatus = 'archive';
     isAdditionalMenuShowing = false;
@@ -62,6 +63,8 @@
   };
 </script>
 
+<!-- * 71.0 Теперь по образу и подобию мы прикрутим наш "swipe" экшен и к странице со списком инвойсов. ↓ -->
+<!-- 71.3 Для абсолютного позиционирования кнопок меню нам понадобится обёртка с классом "relative", которая будет их родительским тегом. -->
 <div class="relative">
   <div
     class="client-table client-row relative z-row rounded-lg bg-white py-3 shadow-tableRow lg:py-6"
@@ -114,6 +117,7 @@
     </div>
   </div>
 
+  <!-- 71.1 Скопируем кнопки из [src\routes\(dashboard)\invoices\InvoiceRow.svelte] и отредактируем их по список клиентов. ↑ -->
   <!-- swipe to reveal -->
   <div class="swipe-revealed-actions">
     <button class="action-button center" on:click={() => (triggerReset = true)}
