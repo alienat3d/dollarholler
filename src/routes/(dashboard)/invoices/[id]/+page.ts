@@ -6,9 +6,10 @@ interface Props {
   };
 }
 
-export function load({ params }: Props) {
+// 81.4 Также обязательно нужно и эту функцию перевести в асинхронную, раз мы это сделали в [src\lib\stores\InvoiceStore.ts]
+export async function load({ params }: Props) {
   const id = params?.id;
-  const invoice = getInvoiceById(id);
+  const invoice = await getInvoiceById(id);
 
   return { invoice };
 }
