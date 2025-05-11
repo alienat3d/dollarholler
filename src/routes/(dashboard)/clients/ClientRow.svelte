@@ -21,8 +21,8 @@
   let isClientFormShowing: boolean = false;
 
   const receivedInvoices = () => {
-    if (client?.invoices) {
-      const paidInvoices = client.invoices.filter((invoice) => invoice.invoiceStatus === 'paid');
+    if (client?.invoice) {
+      const paidInvoices = client.invoice.filter((invoice) => invoice.invoiceStatus === 'paid');
 
       return sumInvoices(paidInvoices);
     }
@@ -31,8 +31,8 @@
   };
 
   const balanceInvoices = () => {
-    if (client?.invoices) {
-      const paidInvoices = client.invoices.filter((invoice) => invoice.invoiceStatus !== 'paid');
+    if (client?.invoice) {
+      const paidInvoices = client.invoice.filter((invoice) => invoice.invoiceStatus !== 'paid');
 
       return sumInvoices(paidInvoices);
     }

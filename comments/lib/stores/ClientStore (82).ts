@@ -3,6 +3,7 @@ import supabase from '$lib/utils/supabase';
 
 export const clients = writable<Client[]>([]);
 
+// * 82.0 Хотя здесь все изменения очень похожи на те, что мы делали в [src\lib\stores\InvoiceStore.ts] на прошлом уроке, но всё же есть некоторые изменения. Обратим внимание, что здесь мы добавляем "lineItems" внутрь скобок "invoice", т.к. "lineItems" имеет связь с табл. "invoice", но не с табл. "client". ↓
 export const loadClients = async () => {
   const { data, error } = await supabase
     .from('client')
@@ -25,6 +26,7 @@ export const updateClient = (clientToUpdate: Client) => {
   return clientToUpdate;
 };
 
+// 82.1 Здесь нам в select нужно ещё добавить поля "invoiceNumber" и "dueDate". А также, что может показаться на первый взгляд странным, по тому, как наши данные смоделированы, нам требуется также положить информацию о клиенте также и в объект "invoice".
 export const getClientById = async (id: string) => {
   const { data, error } = await supabase
     .from('client')

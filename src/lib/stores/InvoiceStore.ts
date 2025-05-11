@@ -38,9 +38,9 @@ export const getInvoiceById = async (id: string) => {
     .select('*, client(id, name), lineItems(*)')
     .eq('id', id);
 
-  if (error) console.error(error);
+  if (error) return console.error(error);
 
   if (data && data[0]) return data[0] as Invoice;
 
-  console.warn('Cannot find invoice with id: ' + id);
+  console.warn('Cannot find an invoice with id: ' + id);
 };
