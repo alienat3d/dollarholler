@@ -38,6 +38,9 @@ export const addClient = async (clientToAdd: Client) => {
   return clientToAdd;
 };
 
+// * 85.0.0 В этом уроке мы перепишем код, отвечающий за редактирование клиентов, чтобы изменения влияли непосредственно на БД в Supabase. Т.к. "clientToUpdate" содержит в себе также информацию об инвойсах, т.ч. нам нужно разделить эту информацию и информацию о клиенте деструктуризацией.
+// 85.0.1 Далее в метод "update" помести "newClient", это те данные, которые мы редактируем, а в метод "eq": id, который будет браться из "newClient.id".
+// 85.0.2 Ну, а метод "update" у "clients" может остаться неизменным.
 export const updateClient = async (clientToUpdate: Client) => {
   const { invoice, ...newClient } = clientToUpdate;
 
