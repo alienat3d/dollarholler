@@ -15,10 +15,6 @@
   const handleSubmit = () => {
     if (formState === 'create') {
       addClient(client);
-      snackbar.send({
-        message: 'A new client was successfully created.',
-        type: 'success'
-      });
     } else {
       updateClient(client);
       snackbar.send({

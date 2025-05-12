@@ -49,6 +49,8 @@
     invoice.lineItems = invoice.lineItems;
   };
 
+  // 84.8.0 Чтобы исправить баг, который был замечен в этом уроке, что перед тем как выдать нам ошибку SnackBar показывает сообщение, что инвойс успешно добавлен, а происходит это потому, что метод "snackbar.send" срабатывает сразу, а не ожидает прежде успешного выполнения "addInvoice". Поэтому измени функцию "handleSubmit" на асинхронную и скажем ей ожидать "addInvoice". Однако после этого сообщение об успешном добавлении всё же появляется, но уже после сообщения об ошибке, поэтому перенесём его лучше в [src\lib\stores\InvoiceStore.ts].
+  // Go to [src\lib\stores\InvoiceStore.ts]
   const handleSubmit = () => {
     if (isNewClient) {
       invoice.client = newClient as Client;
