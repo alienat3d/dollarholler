@@ -35,6 +35,8 @@ export const addClient = async (clientToAdd: Client) => {
     type: 'success'
   });
 
+  // 86.15.1 Вместо того, чтобы просто возвращать "clientToAdd", в котором нет id, завернём это всё в объект и добавим также id.
+  // Go to [src\routes\(dashboard)\invoices\InvoiceForm.svelte]
   return { ...clientToAdd, id };
 };
 

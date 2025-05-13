@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { snackbar } from '$lib/stores/SnackbarStore';
   import { addClient, updateClient } from '$lib/stores/ClientStore';
   import { states } from '$lib/utils/states';
   import Check from '$lib/components/Icon/Check.svelte';
@@ -12,15 +11,11 @@
 
   export let closePanel: () => void = () => {};
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (formState === 'create') {
       addClient(client);
     } else {
-      updateClient(client);
-      snackbar.send({
-        message: 'The client was successfully updated.',
-        type: 'success'
-      });
+      await updateClient(client);
     }
     closePanel();
   };
