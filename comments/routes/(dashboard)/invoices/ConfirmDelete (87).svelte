@@ -8,9 +8,14 @@
   export let invoice: Invoice;
   export let isModalShowing: boolean = false;
 
+  // 87.6.1 Т.ч. перенесём в отдельную функцию "handleDelete" для наглядности. Отправление сообщение снекбара нам уже не понадобятся, т.к. мы это уже реализуем через хранилище и важно сохранять постоянность логики кода.
   const handleDelete = async () => {
     await deleteInvoice(invoice);
     dispatch('close');
+    /* snackbar.send({
+      message: 'Your invoice was successfully deleted.',
+      type: 'success'
+    }); */
   };
 
   const dispatch = createEventDispatcher();
@@ -30,6 +35,7 @@
         onClick={() => dispatch('close')}
         style="secondary"
       />
+      <!-- 87.6.0 Пришло время рефакторинга кнопки удаления, т.к. пока у нас тут было всё прописано инлайново, но с добавлений новых строк становится всё сложнее её поддерживать. ↑ -->
       <Button
         isAnimated={false}
         label="Yes, Delete It"
