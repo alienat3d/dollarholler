@@ -20,6 +20,7 @@
   let triggerReset = false;
   let isAdditionalMenuShowing = false;
   let isClientFormShowing = false;
+  // 88.7 Добавим этот новый комп. модального окна сюда. Сперва нам нужна переменная, что будет хранить состояние модалки.
   let isModalShowing = false;
 
   const receivedInvoices = () => {
@@ -59,6 +60,7 @@
     isAdditionalMenuShowing = false;
   };
 
+  // 88.8 Теперь заполним наконец функцию "handleDeleteClient", мы будем переключать состояние модалки, чтобы она появлялась, а состояние контекстного меню, чтобы оно исчезало. ↓
   const handleDeleteClient = () => {
     isModalShowing = true;
     isAdditionalMenuShowing = false;
@@ -151,6 +153,8 @@
   </SlidePanel>
 {/if}
 
+<!-- 88.9 Вставляем комп. модалки сюда и передадим клиента, а также состояние модалки "isModalShowing". А ещё нам нужно слушать кастомный эвент "close" и запускать функцию закрытия модалки. -->
+<!-- Go to [src\routes\(dashboard)\clients\ClientForm.svelte] -->
 <ConfirmDelete
   {client}
   {isModalShowing}

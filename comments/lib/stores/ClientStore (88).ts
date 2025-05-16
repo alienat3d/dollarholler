@@ -74,6 +74,10 @@ export const getClientById = async (id: string) => {
   console.warn('Cannot find a client with id: ' + id);
 };
 
+// * 88.0 И как обычно, мы начнём с перечисления того, что должна выполнять эта функция: удалить все ассоциированные с клиентом инвойсы, удалить клиента из Supabase DB, обновить хранилище и уведомить пользователя через снекбар комп.
+// 88.1.0 Прежде, чем приступать к первому пункту, надо рассмотреть функцию "deleteInvoice" в [src\lib\stores\InvoiceStore.ts].
+// Go to [src\lib\stores\InvoiceStore.ts]
+// 88.4 Теперь, когда нужная нам функция удаления всех принадлежащих клиенту инвойсов написана, то имплементируем её здесь. Когда проверка на успешное выполнение прошла, то переходим к удалению клиента в БД. Скопируем код для таблицы "client" по ключ. словам "delete rows".
 export const deleteClient = async (clientToDelete: Client) => {
   // delete the associated invoices in Supabase
   const isSuccessful = await deleteClientInvoices(clientToDelete.id);

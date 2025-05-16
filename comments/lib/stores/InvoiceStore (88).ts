@@ -123,6 +123,7 @@ export const updateInvoice = async (invoiceToUpdate: Invoice) => {
   return invoiceToUpdate;
 };
 
+// 88.1.1 И для запуска этой функции нужна информация об ID инвойса, которых мы собрались удалить. У нас нет этой информации, зато у нас есть ID клиента. Технически, можно было бы написать новую функцию, которая пробежится по всем инвойсам и выберет только те, которые принадлежат конкретному клиенту. ↓
 export const deleteInvoice = async (invoiceToDelete: Invoice) => {
   // delete all the line items
   const isSuccessful = await deleteLineItems(invoiceToDelete.id);
@@ -151,6 +152,8 @@ export const deleteInvoice = async (invoiceToDelete: Invoice) => {
   return invoiceToDelete;
 };
 
+// 88.1.2 Итак, создадим новую функцию "deleteClientInvoices", куда будем передавать ID клиента. Внутри будем находить все инвойсы, относящиеся к конкретному клиенту, а потом удалять их.
+// 88.2 Внутрь мы поместим код из доки Supabase по "Select ID", но также прибавим к нему "eq", где уточним, что мы ищем только инвойсы со специфическим значением поля "clientId".
 export const deleteClientInvoices = async (clientId: string): Promise<boolean> => {
   let isSuccessful = true;
 
@@ -165,6 +168,8 @@ export const deleteClientInvoices = async (clientId: string): Promise<boolean> =
     return isSuccessful;
   }
 
+  // 88.3 Циклом пробегаемся по всем инвойсам, что мы получили в data из запроса к Supabase. И глядя на этот код, очевидно, что здесь может быть много промисов. И вот где помогает "Promise.all". "Promise.all" берёт множество промисов, как здесь, где мы пробегаемся циклом по чему-то, и сворачивает их все до единственного промиса и он вернёт успешный промис лишь тогда, когда все остальные промисы были завершены успешно. Т.е. если один из промисов провалился, то "Promise.all" также провалит своё выполнение.
+  // Go to [src\lib\stores\ClientStore.ts]
   // delete the invoices
   await Promise.all(data?.map(async (invoice) => await deleteInvoice(invoice as Invoice)));
 

@@ -10,6 +10,7 @@
 
   export let formState: 'create' | 'edit' = 'create';
 
+  // 88.10 Также нужно передать комп. ConfirmDelete сюда, а для него создать такую же переменную, как и в [src\routes\(dashboard)\clients\ClientRow.svelte]. ↓
   let isModalShowing = false;
 
   export let closePanel: () => void = () => {};
@@ -70,6 +71,7 @@
     <input type="text" name="zip" minlength="5" bind:value={client.zip} />
   </div>
 
+  <!-- 88.11 Ну, а кнопка удаления будет также переводить состояние модалки в false. -->
   <!-- buttons -->
   <div class="field col-span-3">
     {#if formState === 'edit'}
@@ -95,6 +97,7 @@
   </div>
 </form>
 
+<!-- 88.12 И не забыть вставить в самом конце комп. модалки подтверждения удаления. -->
 <ConfirmDelete
   {client}
   {isModalShowing}
