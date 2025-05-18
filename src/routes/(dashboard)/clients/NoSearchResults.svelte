@@ -1,6 +1,6 @@
 <script>
   import BlankRow from '$lib/components/BlankRow.svelte';
-  import InvoiceRowHeader from './InvoiceRowHeader.svelte';
+  import ClientRowHeader from '../clients/ClientRowHeader.svelte';
 </script>
 
 <div class="mt-20 lg:-mt-14">
@@ -11,7 +11,7 @@
     </p>
   </div>
 
-  <InvoiceRowHeader className="text-fog" />
+  <ClientRowHeader className="text-fog" />
   <BlankRow />
   <BlankRow />
   <BlankRow />
