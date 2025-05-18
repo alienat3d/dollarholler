@@ -1,30 +1,105 @@
-<script lang="ts"></script>
+<script lang="ts">
+  import supabase from '$lib/utils/supabase';
+  import Alert from '$lib/components/Alert.svelte';
+  import Loader from '$lib/components/Loader.svelte';
 
-<h1 class="auth-heading">Sign Up</h1>
+  let fullName: string;
+  let email: string;
+  let password: string;
+  let confirmPassword: string;
+  let message: string = '';
+  let isSignupFormShowing: boolean = true;
+  let isLoading: boolean = false;
 
-<form>
-  <div class="field">
-    <label class="text-goldenFizz" for="fullName">Full Name</label>
-    <input type="text" name="fullName" required />
-  </div>
+  const handleSubmit = async () => {
+    message = '';
+    isLoading = true;
 
-  <div class="field">
-    <label class="text-goldenFizz" for="email">Email Address</label>
-    <input type="email" name="email" required />
-  </div>
+    // make sure that the password and the confirm password match
+    if (password !== confirmPassword) {
+      message = "Your password and confirm password don't match.";
+      isLoading = false;
+      return;
+    }
 
-  <div class="field">
-    <label class="text-goldenFizz" for="password">Password</label>
-    <input type="password" name="password" required />
-  </div>
+    // signing up the user
+    let userResults = await supabase.auth.signUp({ email, password });
 
-  <div class="field">
-    <label class="text-goldenFizz" for="confirmPassword">Confirm Password</label>
-    <input type="password" name="confirmPassword" required />
-  </div>
+    if (userResults.error) {
+      message = userResults.error.message;
+      console.error(userResults.error);
+      isLoading = false;
+      return;
+    }
 
-  <button class="auth-button" type="submit">Sign Up</button>
-  <p class="mt-4 text-center text-sm text-white">
-    <a class="underline hover:no-underline" href="/login">Already have an account? Log in!</a>
-  </p>
-</form>
+    // add the full name to the settings table
+    if (userResults?.data?.user?.id) {
+      const settingsResults = await supabase
+        .from('settings')
+        .insert([{ myName: fullName, email, userId: userResults.data.user.id }]);
+
+      if (settingsResults.error) {
+        message = settingsResults.error.message;
+        console.error(settingsResults.error);
+        isLoading = false;
+        return;
+      }
+    }
+
+    isSignupFormShowing = false;
+    isLoading = false;
+  };
+</script>
+
+{#if isSignupFormShowing}
+  <h1 class="auth-heading">Sign Up</h1>
+
+  <Alert {message} />
+
+  <form on:submit|preventDefault={handleSubmit}>
+    <fieldset disabled={isLoading}>
+      <div class="field">
+        <label class="text-goldenFizz" for="fullName">Full Name</label>
+        <input id="fullName" type="text" name="fullName" required bind:value={fullName} />
+      </div>
+      <div class="field">
+        <label class="text-goldenFizz" for="email">Email Address</label>
+        <input
+          id="email"
+          type="email"
+          name="email"
+          required
+          bind:value={email}
+          autocomplete="email"
+        />
+      </div>
+      <div class="field">
+        <label class="text-goldenFizz" for="password">Password</label>
+        <input id="password" type="password" name="password" required bind:value={password} />
+      </div>
+      <div class="field">
+        <label class="text-goldenFizz" for="confirmPassword">Confirm Password</label>
+        <input
+          id="confirmPassword"
+          type="password"
+          name="confirmPassword"
+          required
+          bind:value={confirmPassword}
+        />
+      </div>
+      <button class="auth-button center gap-x-4" type="submit">
+        {#if isLoading}
+          Loading... <Loader />
+        {:else}
+          Sign Up
+        {/if}
+      </button>
+      <p class="mt-4 text-center text-sm text-white">
+        <a class="underline hover:no-underline" href="/login">Already have an account? Log in!</a>
+      </p>
+    </fieldset>
+  </form>
+{:else}
+  <Alert message="Check your email for the confirmation link." />
+  <a class="auth-button block text-center" href="/login">Login</a>
+{/if}
