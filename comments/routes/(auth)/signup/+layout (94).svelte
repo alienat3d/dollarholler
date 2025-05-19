@@ -3,6 +3,8 @@
   import Snackbar from '$lib/components/Snackbar.svelte';
 </script>
 
+<!-- 94.4 Теперь сделаем тоже самое, что и в "src\routes\(dashboard)\+layout.svelte", только оборачивать будем с помощью комп. "Unauthenticated". -->
+<!-- Go to [src\routes\settings\+page.svelte] -->
 <Unauthenticated>
   <Snackbar />
 

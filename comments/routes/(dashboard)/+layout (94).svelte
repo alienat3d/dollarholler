@@ -4,6 +4,8 @@
   import Snackbar from '$lib/components/Snackbar.svelte';
 </script>
 
+<!-- 94.2 И здесь раскрывается сила лэйаутов, достаточно нам записать комп. Authenticated сюда, как он применится ко всем страничкам, использующим этот лэйаут. -->
+<!-- Go to [src\lib\components\Unauthenticated.svelte] -->
 <Authenticated>
   <Snackbar />
 

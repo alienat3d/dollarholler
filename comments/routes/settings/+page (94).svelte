@@ -16,6 +16,7 @@
   });
 </script>
 
+<!-- 94.5 Однако, нам ещё надо убедиться, что и страница настроек защищена от глаз неаутентифицированных пользователей. -->
 <Authenticated>
   <div class="grid min-h-screen grid-cols-12 bg-whisper md:gap-x-16">
     <Snackbar />
