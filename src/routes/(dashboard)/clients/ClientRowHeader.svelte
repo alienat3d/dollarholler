@@ -13,6 +13,6 @@
 
 <style lang="postcss">
   h3 {
-    @apply text-xl font-black leading-snug text-daisyBush;
+    @apply text-xl font-black leading-snug;
   }
 </style>

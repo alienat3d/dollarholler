@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let className = '';
+  export let className: string = '';
 </script>
 
 <div class={`table-header invoice-table hidden lg:grid ${className}`}>

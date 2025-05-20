@@ -65,7 +65,7 @@
     <NoSearchResults />
   {:else}
     <!-- client header row -->
-    <ClientRowHeader />
+    <ClientRowHeader className="text-daisyBush" />
 
     <!-- client rows -->
     <div class="flex flex-col-reverse">
