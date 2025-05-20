@@ -12,6 +12,6 @@
   </h1>
   <div class="relative -top-12">
     <h2 class="mb-3 text-2xl font-black">Sorry!</h2>
-    <p class="text-lg">{$page.error.message}</p>
+    <p class="text-lg">{$page?.error?.message}</p>
   </div>
 </div>

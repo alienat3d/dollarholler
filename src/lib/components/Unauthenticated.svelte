@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { page } from '$app/stores';
   import { goto } from '$app/navigation';
   import supabase from '$lib/utils/supabase';
 
@@ -8,7 +9,7 @@
       data: { session }
     } = await supabase.auth.getSession();
 
-    if (session) {
+    if (session && $page.url.pathname !== '/reset-password') {
       await goto('/invoices');
       return;
     }
