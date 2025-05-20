@@ -1,0 +1,2 @@
+// * 95.0 Защита\сокрытие страниц от незалогиненных пользователей с серверной стороны Supabase DB (https://supabase.com/docs/guides/auth/auth-helpers/sveltekit) [Внимание! Есть уже обновлённая версия — см. доку по ссылке.]
+import '$lib/utils/supabase'

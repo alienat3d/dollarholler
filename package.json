@@ -1,45 +1,45 @@
 {
-	"name": "dollarholler",
-	"version": "0.0.1",
-	"private": true,
-	"scripts": {
-		"dev": "vite dev",
-		"build": "vite build",
-		"preview": "vite preview",
-		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "prettier --check --plugin-search-dir=. . && eslint .",
-		"format": "prettier --write --plugin-search-dir=. .",
-		"seedDb": "node ./seedDb.js"
-	},
-	"devDependencies": {
-		"@sveltejs/adapter-auto": "next",
-		"@sveltejs/kit": "next",
-		"@typescript-eslint/eslint-plugin": "^5.27.0",
-		"@typescript-eslint/parser": "^5.27.0",
-		"autoprefixer": "^10.4.8",
-		"dotenv": "^16.5.0",
-		"eslint": "^8.16.0",
-		"eslint-config-prettier": "^8.3.0",
-		"eslint-plugin-svelte3": "^4.0.0",
-		"postcss": "^8.4.16",
-		"prettier": "^2.7.1",
-		"prettier-plugin-tailwindcss": "^0.1.13",
-		"svelte": "^3.44.0",
-		"svelte-check": "^2.7.1",
-		"svelte-preprocess": "^4.10.7",
-		"tailwindcss": "^3.1.8",
-		"tslib": "^2.3.1",
-		"typescript": "^4.7.4",
-		"vite": "^3.0.4"
-	},
-	"type": "module",
-	"dependencies": {
-		"@supabase/supabase-js": "^2.49.4",
-		"@types/uuid": "^8.3.4",
-		"caniuse-lite": "^1.0.30001716",
-		"date-fns": "^2.29.3",
-		"svelte-markdown": "^0.4.1",
-		"uuid": "^9.0.0"
-	}
+  "dependencies": {
+    "@supabase/auth-helpers-sveltekit": "^0.13.0",
+    "@supabase/supabase-js": "^2.33.1",
+    "@types/uuid": "^9.0.3",
+    "date-fns": "^2.30.0",
+    "svelte-markdown": "^0.4.0",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-auto": "^2.1.0",
+    "@sveltejs/kit": "^1.24.0",
+    "@typescript-eslint/eslint-plugin": "^6.5.0",
+    "@typescript-eslint/parser": "^6.5.0",
+    "autoprefixer": "^10.4.15",
+    "dotenv": "^16.3.1",
+    "eslint": "^8.48.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-svelte3": "^4.0.0",
+    "postcss": "^8.4.29",
+    "prettier": "^3.0.3",
+    "prettier-plugin-tailwindcss": "^0.5.4",
+    "svelte": "^4.2.0",
+    "svelte-check": "^3.5.1",
+    "svelte-preprocess": "^5.0.4",
+    "tailwindcss": "^3.3.3",
+    "tslib": "^2.6.2",
+    "typescript": "^5.2.2",
+    "vite": "^4.4.9"
+  },
+  "name": "dollarholler",
+  "private": true,
+  "scripts": {
+    "build": "vite build",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "dev": "vite dev",
+    "format": "prettier --write --plugin-search-dir=. .",
+    "lint": "prettier --check --plugin-search-dir=. . && eslint .",
+    "preview": "vite preview",
+    "seedDb": "node ./seedDb.js"
+  },
+  "type": "module",
+  "version": "0.0.1"
 }

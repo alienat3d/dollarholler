@@ -1,9 +1,9 @@
 <script lang="ts">
-  import Unauthenticated from '$lib/components/Unauthenticated.svelte';
+  // import Unauthenticated from '$lib/components/Unauthenticated.svelte';
   import Snackbar from '$lib/components/Snackbar.svelte';
 </script>
 
-<Unauthenticated>
+<!-- <Unauthenticated> -->
   <Snackbar />
 
   <div class="min-h-screen w-full bg-daisyBush bg-center md:bg-auth">
@@ -20,4 +20,4 @@
       </div>
     </div>
   </div>
-</Unauthenticated>
+<!-- </Unauthenticated> -->

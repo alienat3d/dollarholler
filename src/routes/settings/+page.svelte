@@ -6,7 +6,7 @@
   import Button from '$lib/components/Button.svelte';
   import Navbar from '$lib/components/Navbar.svelte';
   import Snackbar from '$lib/components/Snackbar.svelte';
-  import Authenticated from '$lib/components/Authenticated.svelte';
+  // import Authenticated from '$lib/components/Authenticated.svelte';
 
   let mySettings: Settings = {} as Settings;
 
@@ -16,7 +16,7 @@
   });
 </script>
 
-<Authenticated>
+<!-- <Authenticated> -->
   <div class="grid min-h-screen grid-cols-12 bg-whisper md:gap-x-16">
     <Snackbar />
     <Navbar />
@@ -94,7 +94,7 @@
       </form>
     </main>
   </div>
-</Authenticated>
+<!-- </Authenticated> -->
 
 <style lang="postcss">
   h2 {
