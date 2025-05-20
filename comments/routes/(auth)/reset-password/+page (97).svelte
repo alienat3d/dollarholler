@@ -1,9 +1,10 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import supabase from '$lib/utils/supabase';
   import Alert from '$lib/components/Alert.svelte';
   import Loader from '$lib/components/Loader.svelte';
+  import supabase from '$lib/utils/supabase';
 
+  // * 97.0 Здесь мы добавим функционал создания нового пароля пользователя после сброса. И здесь очень многое будет похоже на [src\routes\(auth)\forgot-password\+page.svelte], кроме записи нового пароля пользователя в БД Supabase.
   let newPassword: string = '';
   let confirmPassword: string = '';
   let message: string = '';

@@ -28,8 +28,9 @@
 
 <h1 class="auth-heading">Forgot Password</h1>
 
+<Alert {message} />
+
 <form on:submit|preventDefault={handleSubmit}>
-  <Alert {message} />
   <fieldset disabled={isLoading}>
     <div class="field">
       <label class="text-goldenFizz" for="email">Email Address</label>
