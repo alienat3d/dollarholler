@@ -39,7 +39,7 @@ interface Settings {
   city: string;
   state: string;
   zip: string;
-  id: string;
+  id: number;
 }
 
 type NotificationType = 'info' | 'warning' | 'error' | 'success';

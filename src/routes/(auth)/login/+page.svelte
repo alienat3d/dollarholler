@@ -34,7 +34,14 @@
   <fieldset disabled={isLoading}>
     <div class="field">
       <label class="text-goldenFizz" for="email">Email Address</label>
-      <input type="text" name="email" placeholder="Your Email" bind:value={email} required />
+      <input
+        bind:value={email}
+        id="email"
+        type="text"
+        name="email"
+        placeholder="Your Email"
+        required
+      />
     </div>
     <div class="field">
       <div class="flex justify-between">
@@ -44,10 +51,11 @@
         >
       </div>
       <input
+        bind:value={password}
+        id="password"
         type="password"
         name="password"
         placeholder="Your Password"
-        bind:value={password}
         required
       />
     </div>

@@ -60,31 +60,31 @@
     <fieldset disabled={isLoading}>
       <div class="field">
         <label class="text-goldenFizz" for="fullName">Full Name</label>
-        <input id="fullName" type="text" name="fullName" required bind:value={fullName} />
+        <input bind:value={fullName} id="fullName" type="text" name="fullName" required />
       </div>
       <div class="field">
         <label class="text-goldenFizz" for="email">Email Address</label>
         <input
+          bind:value={email}
           id="email"
           type="email"
           name="email"
           required
-          bind:value={email}
           autocomplete="email"
         />
       </div>
       <div class="field">
         <label class="text-goldenFizz" for="password">Password</label>
-        <input id="password" type="password" name="password" required bind:value={password} />
+        <input bind:value={password} id="password" type="password" name="password" required />
       </div>
       <div class="field">
         <label class="text-goldenFizz" for="confirmPassword">Confirm Password</label>
         <input
+          bind:value={confirmPassword}
           id="confirmPassword"
           type="password"
           name="confirmPassword"
           required
-          bind:value={confirmPassword}
         />
       </div>
       <button class="auth-button center gap-x-4" type="submit">

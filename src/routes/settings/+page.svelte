@@ -141,28 +141,28 @@
         >
           <div class="field col-span-6">
             <label for="myName">Name</label>
-            <input id="myName" type="text" name="myName" bind:value={mySettings.myName} />
+            <input bind:value={mySettings.myName} id="myName" type="text" name="myName" />
           </div>
           <div class="field col-span-6">
             <label for="invoiceEmail">Send Invoices from this Email</label>
             <input
+              bind:value={mySettings.email}
               id="invoiceEmail"
               type="email"
               name="invoiceEmail"
-              bind:value={mySettings.email}
             />
           </div>
           <div class="field col-span-6">
             <label for="street">Address</label>
-            <input id="street" type="text" name="street" bind:value={mySettings.street} />
+            <input bind:value={mySettings.street} id="street" type="text" name="street" />
           </div>
           <div class="field col-span-6 md:col-span-2">
             <label for="city">City</label>
-            <input id="city" type="text" name="city" bind:value={mySettings.city} />
+            <input bind:value={mySettings.city} id="city" type="text" name="city" />
           </div>
           <div class="field col-span-6 md:col-span-2">
             <label for="state">State</label>
-            <select id="state" type="text" name="state" bind:value={mySettings.state}>
+            <select bind:value={mySettings.state} id="state" type="text" name="state">
               <option />
               {#each states as state}
                 <option value={state.value}>{state.name}</option>
@@ -171,7 +171,7 @@
           </div>
           <div class="field col-span-6 md:col-span-2">
             <label for="zip">Zip</label>
-            <input id="zip" type="text" name="zip" bind:value={mySettings.zip} />
+            <input bind:value={mySettings.zip} id="zip" type="text" name="zip" />
           </div>
           <div class="field col-span-6 flex justify-end">
             <button
