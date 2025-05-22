@@ -33,12 +33,13 @@ interface Client {
 }
 
 interface Settings {
-  name: string;
+  myName: string;
   email: string;
   street: string;
   city: string;
   state: string;
   zip: string;
+  id: string;
 }
 
 type NotificationType = 'info' | 'warning' | 'error' | 'success';

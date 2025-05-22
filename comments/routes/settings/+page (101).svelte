@@ -12,6 +12,7 @@
   import Loader from '$lib/components/Loader.svelte';
   import Alert from '$lib/components/Alert.svelte';
 
+  // * 101.0 Итак, у нас тут две независимые друг от друга формы, и нам нужно блокировать форму во время её отправки, чтобы предотвратить многократную отсылку, а также блокировать другую форму тоже. Создадим для этого ещё две переменные-переключатели. ↓
   let isInvoiceDetailsLoading: boolean = false;
   let isAccountInfoLoading: boolean = false;
   let isPasswordMatchWatch: boolean = false;
@@ -21,6 +22,7 @@
   let newPassword: string = '';
   let confirmPassword: string = '';
   let accountEmail: string = '';
+  // 101.10.0 В целом, для удобства пользователя лучше было бы сделать, чтобы можно было бы обновлять email без того, чтобы вводить пароль. Создадим для этого ещё одну переменную "originalEmailValue". ↓
   let originalEmailValue: string = '';
   let message: string = '';
 
@@ -36,6 +38,8 @@
     }
   };
 
+  // 101.2.1 ... которая будет изменять данные профиля пользователя.
+  // 101.8 Теперь используем этот метод "updateSettings" из хранилища здесь и переключим "isInvoiceDetailsLoading" в положение true в начале функции и снова в false в конце. ↓
   const handleInvoiceDetails = async () => {
     isInvoiceDetailsLoading = true;
 
@@ -44,6 +48,12 @@
     isInvoiceDetailsLoading = false;
   };
 
+  // 101.3 Тоже самое сделаем и для второй формы, создав для неё функцию, которая будет обновлять пароль для аккаунта пользователя.
+  // Go to [src\lib\stores\SettingsStore.ts]
+  // // 101.10.2 Сделаем проверки и если пройдут, то переключаем состояние загрузки, уведомим пользователя, что ему нужно сперва что-то ввести, прежде, чем тыкать кнопку и выходим из функции.
+  // 101.11 Теперь перейдём к обновлению данных аккаунта, в случае, если проверка перед этим была не пройдена. Для этого из доки "User Management -> Update User" возьмём метод "updateUser".
+  // 101.12 В случае же, если строки ввода паролей не пусты, то мы будем проводить проверку соответствия данных обоих инпутов паролей и в случае отличий выводить сообщение, но в этот раз через комп. Alert.
+  // 101.13 Но, если условие не сработало, то мы обновляем пароль.
   const handleAccountInfo = async () => {
     isAccountInfoLoading = true;
 
@@ -109,6 +119,7 @@
     isAccountInfoLoading = false;
   };
 
+  // 101.10.1 Дальше значение "accountEmail" будет присвоено "originalEmailValue".
   onMount(async () => {
     await loadSettings();
     mySettings = { ...$settings };
@@ -134,6 +145,8 @@
       <h2>Invoice Details</h2>
       <p class="mb-8">This information gets included on each invoice.</p>
 
+      <!-- 101.1.0 Как и раньше, в случае со страницами логина, сброса и смены пароля, мы обернём инпуты формы в <fieldset>. -->
+      <!-- 101.2.0 Создадим слушатель события "submit", который будет запускать функцию "handleInvoiceDetails"... -->
       <form on:submit|preventDefault={handleInvoiceDetails}>
         <fieldset
           class="grid grid-cols-6 gap-x-5"
@@ -197,6 +210,8 @@
         />
       </div>
 
+      <!-- 101.1.1 Тоже самое сделаем и со второй формой и будем блокировать все инпуты через него, как только значение переменных сменится на true. -->
+      <!-- 101.9 Теперь, для этой формы нам нужно забиндить все оставшиеся инпуты к своим переменным. ↑ -->
       <form on:submit|preventDefault={handleAccountInfo}>
         <fieldset
           class="grid grid-cols-6 gap-x-5"

@@ -69,10 +69,10 @@
   </div>
 
   <div class="col-span-6 pt-4 print:col-span-3 sm:col-span-2 sm:col-start-5">
-    {#if $settings && $settings.name}
+    {#if $settings && $settings.myName}
       <div class="label">From</div>
       <p>
-        {$settings.name}<br />
+        {$settings.myName}<br />
         {#if $settings.street && $settings.city && $settings.state && $settings.zip}
           {$settings.street}<br />
           {$settings.city}, {$settings.state}

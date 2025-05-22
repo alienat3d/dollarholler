@@ -28,6 +28,9 @@
   select {
     @apply h-10 w-full appearance-none rounded-lg border-2 border-silver bg-chevronDown bg-right-center bg-no-repeat px-4 lg:h-14 lg:p-4;
   }
+  select:disabled {
+    @apply bg-transparent bg-none opacity-100;
+  }
 
   select:focus,
   textarea:focus,
@@ -64,6 +67,9 @@
 
   .button {
     @apply relative flex items-center whitespace-nowrap rounded-lg px-5 py-2 font-sansSerif text-base font-black lg:px-10 lg:py-3 lg:text-xl;
+  }
+  .button:disabled {
+    @apply pointer-events-none;
   }
 
   .client-table {
